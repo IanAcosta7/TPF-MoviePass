@@ -1,5 +1,5 @@
 <?php 
-namespace business;
+namespace modelsBusinessObject;
 
 class Cinema{
 	
