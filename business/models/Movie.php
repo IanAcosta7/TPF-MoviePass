@@ -1,5 +1,5 @@
 <?php 
-namespace modelsBusinessObject;
+namespace models;
 
 class Movie{
 	
@@ -138,9 +138,10 @@ class Movie{
 
 	public function setRelease_data($release_data){
 		$this->release_data = $release_data;
-    }
+	}
+}
     
-    ?>
+?>
     
 
 	

@@ -2,7 +2,7 @@
     namespace DAO;
 
     use DAO\IMovieDAO as IMovieDAO;
-    use modelsBusinessObject\Movie as Movie;
+    use models\Movie as Movie;
 
     class MovieDAO implements IMovieDAO
     {
