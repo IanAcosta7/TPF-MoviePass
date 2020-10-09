@@ -7,7 +7,8 @@ class Movie{
 	private $popularity;
 	private $vote_count;
 	private $video;
-	private $media_type;
+    private $media_type;
+    private $id;
 	private $adult;
 	private $backdrop_path;
 	private $original_language;
@@ -57,6 +58,14 @@ class Movie{
 
 	public function setMedia_type($media_type){
 		$this->media_type = $media_type;
+    }
+    
+    public function getId(){
+		return $this->id;
+	}
+
+	public function setId($id){
+		$this->id = $id;
 	}
 
 	public function getAdult(){
