@@ -11,7 +11,7 @@ require_once("header.php");
         <input type="text" name="address" required>
 
         <button type="sumbit">Enviar</button>
-        <button type="sumbit">Enviar</button>
+        <button type="reset">Borrar</button>
     </form>
 
 <?php
