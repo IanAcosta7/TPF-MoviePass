@@ -1,3 +1,11 @@
 <?php
 
-echo 'HomeController';
+namespace controllers;
+
+class HomeController {
+
+    function Index() {
+        
+    }
+
+}
