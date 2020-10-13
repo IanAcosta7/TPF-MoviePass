@@ -5,9 +5,9 @@
 
     interface ICinemaDAO
     {
-        function Add(Cinema $cinema);
+        function Add($cinema);
         function GetAll();
-        function Delete();
+        function Delete($name);
         function Update();
     }
 ?>

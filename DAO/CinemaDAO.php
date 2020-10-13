@@ -67,5 +67,27 @@
                 print_r($e);
             }
         }
+
+        private function Delete($name){
+            
+            $this->RetrieveData();
+
+            $this->cinemaList = array_filter($this->cinemaList, function($cinema){
+                return $cinema->getName() != $name;
+            });
+
+            $this->SaveData();
+        }
+
+        private function Update($cinema, $name){
+
+            $this->RetrieveData();
+
+            $this->cinemaList = array_map( function($cine){
+               return $cine->getName() == $name ? $cinema : $cine;
+            }, $this->cinemaList);
+
+            $this->SaveData();
+        }
     }
 ?>
