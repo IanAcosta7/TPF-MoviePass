@@ -9,7 +9,7 @@
     {
         private $cinemaList = array();
 
-        public function Add(Cinema $cinema)
+        public function Add($cinema)
         {
             $this->RetrieveData();
             
@@ -40,23 +40,20 @@
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
-            file_put_contents('https://api.thecinemadb.org/4/list/1?page=1&api_key='. API_key, $jsonContent);
+            file_put_contents('./data/cinemas.json', $jsonContent);
         }
 
         private function RetrieveData()
         {
             $this->cinemaList = array();
             try{
-                $jsonContent = file_get_contents('https://api.thecinemadb.org/4/list/1?page=1&api_key='. API_key);
+                $jsonContent = file_get_contents('./data/cinemas.json');
 
-                $LIST = ($jsonContent) ? json_decode($jsonContent, true) : array();
-                
-                $arrayToDecode = $LIST["results"];
-                
+                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $cinema = new cinema();
+                    $cinema = new Cinema();
                     $cinema->setCapacity( $valuesArray["capacity"]);
                     $cinema->setName( $valuesArray["name"]);
                     $cinema->setAddress( $valuesArray["address"]);
@@ -68,7 +65,7 @@
             }
         }
 
-        private function Delete($name){
+        public function Delete($name){
             
             $this->RetrieveData();
 
@@ -79,7 +76,7 @@
             $this->SaveData();
         }
 
-        private function Update($cinema, $name){
+        public function Update($name, $cinema){
 
             $this->RetrieveData();
 

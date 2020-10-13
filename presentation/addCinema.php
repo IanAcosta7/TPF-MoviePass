@@ -2,7 +2,7 @@
 require_once("header.php");
 ?>
 
-    <form action="" method= "POST"> 
+    <form  method= "GET"> 
         <label for="capacity">Capacidad</label>
         <input type="number" name="capacity" required>
         <label for="name">Nombre</label>

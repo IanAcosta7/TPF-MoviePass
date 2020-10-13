@@ -8,6 +8,6 @@
         function Add($cinema);
         function GetAll();
         function Delete($name);
-        function Update();
+        function Update($name, $cinema);
     }
 ?>
