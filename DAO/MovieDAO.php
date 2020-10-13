@@ -35,7 +35,6 @@
                 $valuesArray["popularity"] = $movie->getPopularity();
                 $valuesArray["vote_count"] = $movie->getVote_count();
                 $valuesArray["video"] = $movie->getVideo();
-                $valuesArray["media_type"] = $movie->getMedia_type();
                 $valuesArray["id"] = $movie->getId();
                 $valuesArray["adult"] = $movie->getAdult();
                 $valuesArray["backdrop_path"] = $movie->getBackdrop_path();
@@ -52,14 +51,14 @@
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
-            file_put_contents('https://api.themoviedb.org/4/list/1?page=1&api_key='. API_key, $jsonContent);
+            file_put_contents(''. API_key, $jsonContent);
         }
 
         private function RetrieveData()
         {
             $this->movieList = array();
             try{
-                $jsonContent = file_get_contents('https://api.themoviedb.org/4/list/1?page=1&api_key='. API_key);
+                $jsonContent = file_get_contents('https://api.themoviedb.org/3/movie/popular?language=es&page=1&api_key='. API_key);
 
                 $LIST = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 
@@ -73,7 +72,6 @@
                     $movie->setPopularity( $valuesArray["popularity"]);
                     $movie->setVote_count( $valuesArray["vote_count"]);
                     $movie->setVideo( $valuesArray["video"]);
-                    $movie->setMedia_type( $valuesArray["media_type"]);
                     $movie->setId( $valuesArray["id"]);
                     $movie->setAdult( $valuesArray["adult"]);
                     $movie->setBackdrop_path( $valuesArray["backdrop_path"]);

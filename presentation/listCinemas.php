@@ -11,19 +11,19 @@
                 <?php
                     if(isset($cinemas)){
                         foreach($cinemas as $Cinema){
-                            ?>
-                                <tr>
-                                    <td><?= $Cinema->getCapacity(); ?></td>
-                                    <td><?= $Cinema->getName(); ?></td>
-                                    <td><?= $Cinema->getAddress(); ?></td>
-                                    <td>
-                                        <button type="submit" name="nombre" value=<?= $Cinema->getName(); ?>> Eliminar</button>
-                                    <td>                                             
-                                </tr>
-                            <?php
-                            }
-                            }
-                            ?>
+                ?>
+                <tr>
+                    <td><?= $Cinema->getCapacity(); ?></td>
+                    <td><?= $Cinema->getName(); ?></td>
+                    <td><?= $Cinema->getAddress(); ?></td>
+                    <td>
+                        <button type="submit" name="nombre" value=<?= $Cinema->getName(); ?>> Eliminar</button>
+                    <td>                                             
+                </tr>
+                <?php
+                        }
+                    }
+                ?>
             </form>          
         </tbody>
     </table>

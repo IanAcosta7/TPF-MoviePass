@@ -5,12 +5,37 @@
         "address": "Independencia 4353 7B"
     },
     {
-        "capacity": "42",
-        "name": "SSoler",
+        "capacity": "123",
+        "name": "Ian",
         "address": "Independencia 4353 7B"
     },
     {
-        "capacity": "123",
+        "capacity": "2",
+        "name": "Ambassador",
+        "address": "C\u00f3rdoba"
+    },
+    {
+        "capacity": "5",
+        "name": "Aldrey",
+        "address": "Sarmiento"
+    },
+    {
+        "capacity": "5",
+        "name": "Aldrey",
+        "address": "Sarmiento"
+    },
+    {
+        "capacity": "2",
+        "name": "Ambassador",
+        "address": "C\u00f3rdoba"
+    },
+    {
+        "capacity": "15",
+        "name": "Ian",
+        "address": "Independencia 4353 7B"
+    },
+    {
+        "capacity": "15",
         "name": "Ian",
         "address": "Independencia 4353 7B"
     }

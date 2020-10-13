@@ -7,7 +7,6 @@
                          <th>Popularidad</th>
                          <th>Votos</th>
                          <th>Video</th>
-                         <th>Media</th>
                          <th>ID</th>
                          <th>ATP</th>
                          <th>Backdrop path</th>
@@ -27,21 +26,27 @@
 
                                         ?>
                                              <tr>
-                                                  <td><?php echo '<img src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path(). '"/>'; ?></td>
-                                                  <td><?php echo $Movie->getPopularity(); ?></td>
-                                                  <td><?php echo $Movie->getVote_count(); ?></td>
-                                                  <td><?php echo $Movie->getVideo(); ?></td>
-                                                  <td><?php echo $Movie->getMedia_type(); ?></td>
-                                                  <td><?php echo $Movie->getId(); ?></td>
-                                                  <td><?php echo $Movie->getAdult(); ?></td>
-                                                  <td><?php echo '<img src="https://image.tmdb.org/t/p/w500'. $Movie->getBackdrop_path(). '"/>'; ?></td>
-                                                  <td><?php echo $Movie->getOriginal_language();?></td>
-                                                  <td><?php echo $Movie->getOriginal_title();?></td>
-                                                  <td><?php echo $Movie->getGenre_ids()?></td>
-                                                  <td><?php echo $Movie->getTitle()?></td>
-                                                  <td><?php echo $Movie->getVote_average()?></td>
-                                                  <td><?php echo $Movie->getOverview()?></td>
-                                                  <td><?php echo $Movie->getRelease_date()?></td>                                                
+                                                  <td><?= '<img src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path(). '"/>'; ?></td>
+                                                  <td><?= $Movie->getPopularity(); ?></td>
+                                                  <td><?= $Movie->getVote_count(); ?></td>
+                                                  <td><?= $Movie->getVideo(); ?></td>
+                                                  <td><?= $Movie->getId(); ?></td>
+                                                  <td><?= $Movie->getAdult(); ?></td>
+                                                  <td><?= '<img src="https://image.tmdb.org/t/p/w500'. $Movie->getBackdrop_path(). '"/>'; ?></td>
+                                                  <td><?= $Movie->getOriginal_language();?></td>
+                                                  <td><?= $Movie->getOriginal_title();?></td>
+                                                  <td><?php
+                                                       foreach ($Movie->getGenre_ids() as $genre) {
+                                                            foreach ($genres as $value) {
+                                                                 if ($genre == $value['id'])
+                                                                      echo $value['name'] . '<br>';
+                                                            }
+                                                       }
+                                                  ?></td>
+                                                  <td><?= $Movie->getTitle()?></td>
+                                                  <td><?= $Movie->getVote_average()?></td>
+                                                  <td><?= $Movie->getOverview()?></td>
+                                                  <td><?= $Movie->getRelease_date()?></td>                                                
                                              </tr>
                                         <?php
                                    }
