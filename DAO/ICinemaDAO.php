@@ -1,7 +1,7 @@
 <?php
     namespace DAO;
 
-    use models\Cinema;
+    use business\models\Cinema;
 
     interface ICinemaDAO
     {

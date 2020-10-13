@@ -15,16 +15,6 @@
         "address": "C\u00f3rdoba"
     },
     {
-        "capacity": "5",
-        "name": "Aldrey",
-        "address": "Sarmiento"
-    },
-    {
-        "capacity": "5",
-        "name": "Aldrey",
-        "address": "Sarmiento"
-    },
-    {
         "capacity": "2",
         "name": "Ambassador",
         "address": "C\u00f3rdoba"
@@ -37,6 +27,16 @@
     {
         "capacity": "15",
         "name": "Ian",
+        "address": "Independencia 4353 7B"
+    },
+    {
+        "capacity": "53",
+        "name": "Brahma",
+        "address": "Independencia 4353 7B"
+    },
+    {
+        "capacity": "50",
+        "name": "AzarJ",
         "address": "Independencia 4353 7B"
     }
 ]

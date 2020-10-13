@@ -2,7 +2,7 @@
     namespace DAO;
 
     use DAO\ICinemaDAO;
-    use models\Cinema;
+    use business\models\Cinema;
     require_once("./config/ENV.php");
 
     class CinemaDAO implements ICinemaDAO

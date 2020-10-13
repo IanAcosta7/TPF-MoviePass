@@ -2,7 +2,7 @@
     namespace DAO;
 
     use DAO\IMovieDAO as IMovieDAO;
-    use models\Movie as Movie;
+    use business\models\Movie as Movie;
     require_once("./config/ENV.php");
 
     class MovieDAO implements IMovieDAO

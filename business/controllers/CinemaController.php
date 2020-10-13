@@ -1,7 +1,7 @@
-<?php namespace controllers;
+<?php namespace business\controllers;
 use DAO\CinemaDAO;
 use DAO\MovieDAO;
-use models\Cinema;
+use business\models\Cinema;
 
 class CinemaController{
 

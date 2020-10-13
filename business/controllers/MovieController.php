@@ -1,4 +1,4 @@
-<?php namespace controllers;
+<?php namespace business\controllers;
 
 use DAO\MovieDAO;
 use DAO\GenreDAO;

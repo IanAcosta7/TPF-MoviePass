@@ -1,5 +1,5 @@
 <?php 
-namespace models;
+namespace business\models;
 
 class Movie{
 	

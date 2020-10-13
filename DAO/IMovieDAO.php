@@ -1,7 +1,7 @@
 <?php
     namespace DAO;
 
-    use models\Movie as Movie;
+    use business\models\Movie as Movie;
 
     interface IMovieDAO
     {

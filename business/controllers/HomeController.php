@@ -1,6 +1,7 @@
-<?php namespace controllers;
+<?php namespace business\controllers;
 
-use controllers\CinemaController;
+use business\controllers\CinemaController;
+
 class HomeController {
 
     public function Index() {
