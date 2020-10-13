@@ -1,7 +1,7 @@
 <?php 
-namespace modelsBusinessObject;
+namespace models;
 
-class Cinema{
+class Cinema {
 	
 	private $capacity;
 	private $name;

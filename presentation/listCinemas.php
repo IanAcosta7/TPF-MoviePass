@@ -7,25 +7,27 @@
             <th>Direccion</th>
         </thead>
         <tbody>
-            <form action="./process/deleteCinema.php" method="GET">
+            <form action="delete" method="GET">
                 <?php
                     if(isset($cinemas)){
                         foreach($cinemas as $Cinema){
                             ?>
                                 <tr>
-                                    <td><?php echo $Cinema->getCapacity(); ?></td>
-                                    <td><?php echo $Cinema->getName(); ?></td>
-                                    <td><?php echo $Cinema->getAddress(); ?></td>
+                                    <td><?= $Cinema->getCapacity(); ?></td>
+                                    <td><?= $Cinema->getName(); ?></td>
+                                    <td><?= $Cinema->getAddress(); ?></td>
                                     <td>
-                                        <button type="submit" name="nombre" value=<?php $Cinema->getName(); ?>> Eliminar</button>
+                                        <button type="submit" name="nombre" value=<?= $Cinema->getName(); ?>> Eliminar</button>
                                     <td>                                             
                                 </tr>
                             <?php
                             }
-                                }
+                            }
                             ?>
             </form>          
         </tbody>
     </table>
+
+    <a href="<?=ROOT_CLIENT?>cinema/addCinema">Añadir Cine</a>
 
 <?php include_once("footer.php");?>

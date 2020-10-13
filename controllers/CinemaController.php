@@ -1,29 +1,38 @@
 <?php namespace controllers;
-use DAO\MovieDAO;
 use DAO\CinemaDAO;
+use DAO\MovieDAO;
+use models\Cinema;
 
 class CinemaController{
-    public function loadForm($form)
-    {
-        $movieDAO = new MovieDAO();
-        $data= $movieDAO->GetAll();
-        $cinemaDAO=new CinemaDAO();
-        $cinemas=$cinemaDAO->GetAll();
-        require_once("./presentation/".$form."Cinemas.php");   
-        
+
+    private $cinemaDAO;
+
+    public function __construct() {
+        $this->cinemaDAO = new CinemaDAO();
     }
 
-    public function Delete($name)
-    {
-        $cinemaDao=new CinemaDAO();
-        $cinemas=$cinemaDao->GetAll();
-        require_once("./presentation/deleteCinema.php");    
+    public function Index() {
+        $cinemas = $this->cinemaDAO->GetAll();
+        require_once("./presentation/listCinemas.php");   
     }
-    public function addCinema($cinema)
-    {
-        $cinemaDao=new CinemaDAO();
-        $cinemaDao->addCinema($cinema);
-        require_once("./presentation/addCinema.php");    
+
+    public function Delete($name = null) {
+        if ($name)
+            $this->cinemaDAO->Delete($name);
+
+        $this->Index();  
+    }
+
+    public function addCinema($capacity = null, $name = null, $address = null) {
+        if ($capacity && $name && $address) {
+            $cinema = new Cinema($capacity, $name, $address);
+    
+            $this->cinemaDAO->Add($cinema);
+
+            $this->Index();
+        } else {
+            require_once("./presentation/addCinema.php");   
+        }
     }
 
 }

@@ -53,10 +53,7 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $cinema = new Cinema();
-                    $cinema->setCapacity( $valuesArray["capacity"]);
-                    $cinema->setName( $valuesArray["name"]);
-                    $cinema->setAddress( $valuesArray["address"]);
+                    $cinema = new Cinema($valuesArray["capacity"], $valuesArray["name"], $valuesArray["address"]);
 
                     array_push($this->cinemaList, $cinema);
                 }
@@ -69,7 +66,7 @@
             
             $this->RetrieveData();
 
-            $this->cinemaList = array_filter($this->cinemaList, function($cinema){
+            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use ($name) {
                 return $cinema->getName() != $name;
             });
 
@@ -80,7 +77,7 @@
 
             $this->RetrieveData();
 
-            $this->cinemaList = array_map( function($cine){
+            $this->cinemaList = array_map( function($cine) use ($name, $cinema) {
                return $cine->getName() == $name ? $cinema : $cine;
             }, $this->cinemaList);
 
