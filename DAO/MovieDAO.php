@@ -3,6 +3,7 @@
 
     use DAO\IMovieDAO as IMovieDAO;
     use models\Movie as Movie;
+    require_once("./config/ENV.php");
 
     class MovieDAO implements IMovieDAO
     {
@@ -51,14 +52,14 @@
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
-            file_put_contents('https://api.themoviedb.org/4/list/1?page=1&api_key=1e53298821839261b56ec84c99724de5', $jsonContent);
+            file_put_contents('https://api.themoviedb.org/4/list/1?page=1&api_key='. API_key, $jsonContent);
         }
 
         private function RetrieveData()
         {
             $this->movieList = array();
             try{
-                $jsonContent = file_get_contents('https://api.themoviedb.org/4/list/1?page=1&api_key=1e53298821839261b56ec84c99724de5');
+                $jsonContent = file_get_contents('https://api.themoviedb.org/4/list/1?page=1&api_key='. API_key);
 
                 $LIST = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 
