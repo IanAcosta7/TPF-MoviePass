@@ -17,7 +17,7 @@ class Movie{
 	private $title;
 	private $vote_average;
 	private $overview;
-    private $release_data;
+    private $release_date;
 
 
     public function getPoster_path(){
@@ -132,12 +132,12 @@ class Movie{
 		$this->overview = $overview;
 	}
 
-	public function getRelease_data(){
-		return $this->release_data;
+	public function getRelease_date(){
+		return $this->release_date;
 	}
 
-	public function setRelease_data($release_data){
-		$this->release_data = $release_data;
+	public function setRelease_date($release_date){
+		$this->release_date = $release_date;
 	}
 }
     

@@ -51,40 +51,43 @@
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
-            file_put_contents('https://api.themoviedb.org/4/list/1?page=1&api_key=', $jsonContent);
+            file_put_contents('https://api.themoviedb.org/4/list/1?page=1&api_key=1e53298821839261b56ec84c99724de5', $jsonContent);
         }
 
         private function RetrieveData()
         {
             $this->movieList = array();
+            try{
+                $jsonContent = file_get_contents('https://api.themoviedb.org/4/list/1?page=1&api_key=1e53298821839261b56ec84c99724de5');
 
-            if(file_exists('https://api.themoviedb.org/4/list/1?page=1&api_key='))
-            {
-                $jsonContent = file_get_contents('https://api.themoviedb.org/4/list/1?page=1&api_key=');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
+                $LIST = ($jsonContent) ? json_decode($jsonContent, true) : array();
+                
+                $arrayToDecode = $LIST["results"];
+                
 
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $movie = new movie();
-                    $movie->$movie->setPoster_path( $valuesArray["poster_path"]);
-                    $movie->$movie->setPopularity( $valuesArray["popularity"]);
-                    $movie->$movie->setVote_count( $valuesArray["vote_count"]);
-                    $movie->$movie->setVideo( $valuesArray["video"]);
-                    $movie->$movie->setMedia_type( $valuesArray["media_type"]);
-                    $movie->$movie->setId( $valuesArray["id"]);
-                    $movie->$movie->setAdult( $valuesArray["adult"]);
-                    $movie->$movie->setBackdrop_path( $valuesArray["backdrop_path"]);
-                    $movie->$movie->setOriginal_language( $valuesArray["original_language"]);
-                    $movie->$movie->setOriginal_title( $valuesArray["original_title"]);
-                    $movie->$movie->setGenre_ids( $valuesArray["genre_ids"]);
-                    $movie->$movie->setTitle( $valuesArray["title"]);
-                    $movie->$movie->setVote_average( $valuesArray["vote_average"]);
-                    $movie->$movie->setOverview( $valuesArray["overview"]);
-                    $movie->$movie->setRelease_data( $valuesArray["release_data"]);
+                    $movie->setPoster_path( $valuesArray["poster_path"]);
+                    $movie->setPopularity( $valuesArray["popularity"]);
+                    $movie->setVote_count( $valuesArray["vote_count"]);
+                    $movie->setVideo( $valuesArray["video"]);
+                    $movie->setMedia_type( $valuesArray["media_type"]);
+                    $movie->setId( $valuesArray["id"]);
+                    $movie->setAdult( $valuesArray["adult"]);
+                    $movie->setBackdrop_path( $valuesArray["backdrop_path"]);
+                    $movie->setOriginal_language( $valuesArray["original_language"]);
+                    $movie->setOriginal_title( $valuesArray["original_title"]);
+                    $movie->setGenre_ids( $valuesArray["genre_ids"]);
+                    $movie->setTitle( $valuesArray["title"]);
+                    $movie->setVote_average( $valuesArray["vote_average"]);
+                    $movie->setOverview( $valuesArray["overview"]);
+                    $movie->setRelease_date( $valuesArray["release_date"]);
 
                     array_push($this->movieList, $movie);
                 }
+            }catch(Exception $e){
+                print_r($e);
             }
         }
     }
