@@ -7,7 +7,7 @@
             <th>Direccion</th>
         </thead>
         <tbody>
-            <form action="delete" method="GET">
+            <form action="<?=ROOT_CLIENT?>cinema/delete" method="POST">
                 <?php
                     if(isset($cinemas)){
                         foreach($cinemas as $Cinema){
