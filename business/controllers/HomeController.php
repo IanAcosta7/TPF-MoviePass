@@ -5,7 +5,7 @@ use business\controllers\CinemaController;
 class HomeController {
 
     public function Index() {
-        require('./presentation/index.php');
+        require_once('./presentation/signin.php');
     }
 
 }
