@@ -19,4 +19,10 @@ class MovieController {
         require('./presentation/listMovies.php');
     }
 
+    public function showAddMovie()
+    {
+        $genres = $this->genresDAO->GetAll();
+        require_once("./presentation/addMovie.php");
+    }
+
 }
