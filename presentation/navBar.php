@@ -1,3 +1,3 @@
-<nav>  
-    <a href="">Cerrar Sesión</a>
+<nav class="navbar">  
+    <a class="navbar-btn" href="">Cerrar Sesión</a>
 </nav>

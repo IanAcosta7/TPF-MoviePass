@@ -1,4 +1,7 @@
-<?php include_once("header.php");?>
+<?php 
+    include_once("header.php");
+    include_once("navBar.php");
+?>
 
     <table border=1>
         <thead>

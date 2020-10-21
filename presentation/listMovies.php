@@ -1,23 +1,20 @@
-<?php include_once("header.php");?>
+<?php 
+     include_once("header.php");
+     include_once("navbar.php");
+?>
                
                <form action="<?php echo ROOT_CLIENT?>Movie/" method="post"  class="">
+                    <label for="ListMovie">Mostrar Peliculas por genero:</label>
 
-               <label for="ListMovie">Mostrar Peliculas por genero:</label>
+                    <select name="filterGenres" id="">
 
-               <select name="filterGenres" id="">
+                         <?php foreach($listGenres as $genres){
+                              echo "<option value=".$genres.">".$genres."</option>";
+                         }?>
+                    </select>
 
-                    <?php foreach($listGenres as $genres){
-                         echo "<option value=".$genres.">".$genres"</option>";
-                    }?>
-               </select>
-
-               <button type="submit">Filtrar</button>
-
+                    <button type="submit">Filtrar</button>
                </form>
-
-
-
-
 
                 <table border="1">
                     <thead>
