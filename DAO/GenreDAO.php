@@ -22,7 +22,7 @@ class GenreDAO {
 
             foreach($arrayToDecode as $valuesArray)
             {
-                array_push($this->genres, $valuesArray);
+                array_push($this->genres, $valuesArray["name"]);
             }
         }catch(Exception $e){
             print_r($e);
