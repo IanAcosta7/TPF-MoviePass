@@ -2,16 +2,18 @@
      include_once("header.php");
      include_once("navbar.php");
 ?>
-               <form action="<?php echo ROOT_CLIENT?>presentation/listMovieGenre" method="post"  class="">
+               <form action="<?php echo ROOT_CLIENT?>movie/" method="post"  class="">
                     
                     <label for="ListMovie">Mostrar Peliculas por genero:</label>
                     <select name="filterGenres" id="">
-
-                         <?php foreach($listGenres as $genres){
-                              echo "<option value=".$genres.">".$genres."</option>";
-                         }?>
+                         <option value='default'>Todas</option>
+                         <?php 
+                              foreach($genres as $genre)
+                              {
+                                   echo "<option value=".$genre['name'].">".$genre['name']."</option>";
+                              }
+                         ?>
                     </select>
-
                     <button type="submit">Filtrar</button>
                </form>
 
@@ -37,6 +39,19 @@
 
                          <?php
                               if(isset($data)){
+                                   if($filterGenre != null)
+                                   {
+                                      $data = array_filter($data, function($var)use($filterGenre, $genres){
+                                        $flag = false;
+                                        foreach($var->getGenre_ids() as $genre){
+                                             foreach ($genres as $value) {
+                                                  if ($genre == $value['id'] && $value['name'] == $filterGenre)
+                                                       $flag = true;   
+                                             }
+                                        }
+                                        return $flag;
+                                      });  
+                                   } 
                                    foreach($data as $Movie){
 
                                         ?>

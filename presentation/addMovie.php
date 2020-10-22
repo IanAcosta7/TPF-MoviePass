@@ -7,7 +7,7 @@ require_once("header.php");
             <?php 
                 foreach($genres as $genre)
                 {
-                    echo "<option value=".$genre.">".$genre."</option>";
+                    echo "<option value=".$genre['name'].">".$genre['name']."</option>";
                 }
             ?>
         </select>

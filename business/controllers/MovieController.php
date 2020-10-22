@@ -13,7 +13,9 @@ class MovieController {
         $this->genresDAO = new genreDAO();
     }
 
-    public function Index() {
+    public function Index($filterGenre = null) {
+        if($filterGenre == 'default')
+            $filterGenre = null;
         $data = $this->movieDAO->GetAll();
         $genres = $this->genresDAO->GetAll();
         require('./presentation/listMovies.php');
