@@ -2,10 +2,9 @@
      include_once("header.php");
      include_once("navbar.php");
 ?>
-               
-               <form action="<?php echo ROOT_CLIENT?>Movie/" method="post"  class="">
+               <form action="<?php echo ROOT_CLIENT?>presentation/listMovieGenre" method="post"  class="">
+                    
                     <label for="ListMovie">Mostrar Peliculas por genero:</label>
-
                     <select name="filterGenres" id="">
 
                          <?php foreach($listGenres as $genres){
