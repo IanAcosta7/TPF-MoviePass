@@ -88,10 +88,4 @@
                     </tbody>
                </table>
 
-
-
-
-
-
-
 <?php include_once("header.php");?>

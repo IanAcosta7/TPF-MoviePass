@@ -21,10 +21,17 @@ class MovieController {
         require('./presentation/listMovies.php');
     }
 
-    public function showAddMovie()
+    public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null)
     {
+        if($filterGenre == 'default')
+            $filterGenre = null;
+        if($filterDateFrom == null)
+            $filterDateFrom = null;
+        if($filterDateTo == null)
+            $filterDateTo = date("Y-m-d");
+        $data = $this->movieDAO->GetAll();
         $genres = $this->genresDAO->GetAll();
-        require_once("./presentation/addMovie.php");
+        require_once("./presentation/addShow.php");
     }
 
 }
