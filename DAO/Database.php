@@ -7,8 +7,6 @@ class Database {
         if (!$conn) {
             die("Database Connection failed: ");
         }
-
-        echo "Connected successfully";
     }
 }
 
