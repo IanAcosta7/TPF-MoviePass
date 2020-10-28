@@ -46,4 +46,16 @@ class MovieController {
         require_once("./presentation/addShow.php");
     }
 
+    public function addShowForm(){
+
+       $cinemaList = $this->CinemaDAO->GetAll();
+       require_once("./presentation/addShowForm.php");
+    }
+    
+    public function addShow($cinema, $date, $time, $id, $submit){
+        if($submit == 0)
+            require_once("./presentation/addShowForm.php");
+        else
+            $this->Index();
+     }
 }
