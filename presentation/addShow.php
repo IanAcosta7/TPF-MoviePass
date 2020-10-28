@@ -34,17 +34,60 @@
                <?php
                     if(isset($data)) {
                          if($filterGenre != null) {
-                         $data = array_filter($data, function($var) use ($filterGenre, $genres) {
-                              $flag = false;
-                              foreach($var->getGenre_ids() as $genre) {
-                                   foreach ($genres as $value) {
-                                        if ($genre == $value['id'] && $value['name'] == $filterGenre)
-                                             $flag = true;   
+                              $data = array_filter($data, function($var) use ($filterGenre, $genres) {
+                                   $flag = false;
+                                   foreach($var->getGenre_ids() as $genre) {
+                                        foreach ($genres as $value) {
+                                             if ($genre == $value['id'] && $value['name'] == $filterGenre)
+                                                  $flag = true;   
+                                        }
                                    }
+                                   return $flag;
+                              });  
+                         }
+                    
+                         if (isset($data)) {
+                              if($filterGenre != null || $filterDateFrom != null || $filterDateTo != null || $filterName!=date("Y-m-d")) {
+                                   $data = array_filter(
+                                        $data,
+                                        function($var)
+                                        use ($filterGenre,$filterName, $filterDateFrom, $filterDateTo ,$genres)
+                                   {
+                                        $flag = false;
+                                        $flagGenre=true;
+                                        $flagDate=true;
+                                        $flagName=true;
+
+                                        if($filterGenre != null) {
+                                             $flagGenre=false;
+                                             foreach ($var->getGenre_ids() as $genre) {
+                                                  foreach ($genres as $value) {
+                                                       if ($genre == $value['id'] && $value['name'] == $filterGenre)
+                                                            $flagGenre = true;   
+                                                  }
+                                             }
+                                        }
+
+                                        if($filterName != null ) {
+                                             $flagName=false;
+                                             if($var->getTitle() == $filterName)
+                                                  $flagName=true;
+                                        }
+
+                                        if($filterDateFrom !=null || $filterDateFrom !=null) {
+                                             $flagDate=false;
+                                             if($filterDateFrom > $var->getRelease_date() &&  $var->getRelease_date()> $filterDateTo)
+                                                  $flagDate= true;
+                                        }
+
+                                        if($flagGenre==true && $flagDate==true && $flagName==true)
+                                             $flag=true;
+
+                                        return $flag;
+                                   });  
                               }
-                              return $flag;
-                         });  
-                         } 
+                         }
+                    
                          foreach($data as $Movie) {
                               echo '
                                    <div class="card-box">
