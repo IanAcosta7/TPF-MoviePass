@@ -1,6 +1,6 @@
 <?php 
     include_once("header.php");
-    include_once("navBar.php");
+    include_once("navbar.php");
 ?>
 
     <table border=1>

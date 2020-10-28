@@ -14,6 +14,8 @@ class MovieController {
     }
 
     public function Index($filterGenre = null) {
+        $custom_css = 'movie-list.css';
+
         if($filterGenre == 'default')
             $filterGenre = null;
         $data = $this->movieDAO->GetAll();
