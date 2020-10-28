@@ -2,7 +2,6 @@
 
 use DAO\MovieDAO;
 use DAO\GenreDAO;
-use DAO\ShowDAO;
 
 class MovieController {
 
@@ -22,9 +21,6 @@ class MovieController {
         $data = $this->movieDAO->GetAll();
         $genres = $this->genresDAO->GetAll();
         require('./presentation/listMovies.php');
-
-        $showDAO = new ShowDAO();
-        $showDAO->getAll();
     }
 
     public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null)
