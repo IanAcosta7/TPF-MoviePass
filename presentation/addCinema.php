@@ -10,7 +10,7 @@ require_once("header.php");
         <label for="address">Direccion</label>
         <input type="text" name="address" required>
 
-        <button type="sumbit">Enviar</button>
+        <button type="submit">Enviar</button>
         <button type="reset">Borrar</button>
     </form>
 
