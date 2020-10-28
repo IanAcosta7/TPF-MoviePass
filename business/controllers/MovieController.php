@@ -25,6 +25,8 @@ class MovieController {
 
     public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null)
     {
+        $custom_css = "movie-list.css";
+
         if($filterGenre == 'default')
             $filterGenre = null;
         if($filterDateFrom == null)
