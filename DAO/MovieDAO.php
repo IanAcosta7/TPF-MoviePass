@@ -3,6 +3,7 @@
 
     use DAO\IMovieDAO as IMovieDAO;
     use business\models\Movie as Movie;
+    use DAO\Database;
     require_once("./config/ENV.php");
 
     class MovieDAO implements IMovieDAO
@@ -21,10 +22,25 @@
         public function GetAll()
         {
             $this->RetrieveData();
-
+            //$this->saveInDatabase();
             return $this->movieList;
         }
 
+        private function saveInDatabase(){
+            $data = Database::execute('get_movies');
+            $array = array_filter($this->movies, function ($movies){
+                $flag = false;
+                foreach ($data as $value) {
+                    if($value == $movie){
+                        $flag = true;
+                    }
+                }
+                return $flag;
+            });
+            if(count($array) > 0){
+                Database::execute('set_movies', $array);
+            }
+        }
         private function SaveData()
         {
             $arrayToEncode = array();

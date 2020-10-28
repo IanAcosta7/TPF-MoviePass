@@ -2,6 +2,7 @@
 
 use DAO\MovieDAO;
 use DAO\GenreDAO;
+use DAO\Database;
 
 class MovieController {
 
@@ -15,6 +16,13 @@ class MovieController {
 
     public function Index($filterGenre = null) {
         $custom_css = 'movie-list.css';
+        Database::connect();
+        if(Database::execute('get_genres'))
+            echo 'Si';
+        else {
+            echo 'no';
+        }
+        print_r(Database::execute('get_genres'));
 
         if($filterGenre == 'default')
             $filterGenre = null;
