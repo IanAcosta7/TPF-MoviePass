@@ -18,11 +18,17 @@ class Database {
 
 
     public static function execute($procedure, $array = ''){
-        
-        if($array != ''){
+        if($array != '') {
+            $array = array_map(function ($value) {
+                return '"'. $value .'"';
+            }, $array);
+            
             $array = implode(',', $array);
         }
-        $statement = Database::$pdo->prepare("CALL ". $procedure ."(" . $array . ")");
+
+        $query = "CALL ". $procedure ."(" . $array . ")";
+        echo $query;
+        $statement = Database::$pdo->prepare($query);
         $statement->execute();
 
         $result = $statement->fetchAll();

@@ -8,11 +8,10 @@
 
          <label for="cinema">Cines</label>
          <select name="cinemas" id="cinemas">
-         <option value="1">Cinrm</option>
             <?php 
                 foreach($cinemaList as $cinema)
                 {
-                    echo '<option value=".$cinema["id"]"</option>';
+                    echo '<option value="'. $cinema->getId() .'">'. $cinema->getName() .'</option>';
                 }
             ?>
         </select> 
@@ -22,6 +21,9 @@
 
         <label for="time">Horario</label>
         <input type="time" name="time" required> 
+
+        <label for="ticketValue">Valor de la entrada</label>
+        <input type="text" name="ticketValue" required> 
 
         <input type="hidden" name="idMovie" value= "<?php echo $idMovie ?>" required> 
 

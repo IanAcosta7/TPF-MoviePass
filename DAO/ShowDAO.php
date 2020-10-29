@@ -13,10 +13,10 @@ class ShowDAO {
         return $this->shows;
     }
 
-    public function add($date, $time, $cinema, $idMovie)
+    public function add($idCinema, $idMovie, $date, $time, $ticketValue)
     {
         Database::connect();
-        Database::execute('add_show', array($date, $time, $idMovie, $cinema));
+        Database::execute('add_show', array($idCinema, $idMovie, $date, $time, $ticketValue));
     }
 
     private function RetrieveData()

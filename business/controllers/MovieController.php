@@ -49,7 +49,7 @@ class MovieController {
        require_once("./presentation/addShowForm.php");
     }
     
-    public function addShow($cinema, $date, $time, $idMovie){
-        $this->showDAO->add($date, $time, $cinema, $idMovie);
+    public function addShow($idCinema, $date, $time, $ticketValue, $idMovie){
+        $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
     }
 }
