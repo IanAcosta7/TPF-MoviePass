@@ -8,10 +8,11 @@
 
          <label for="cinema">Cines</label>
          <select name="cinemas" id="cinemas">
+         <option value="1">Cinrm</option>
             <?php 
                 foreach($cinemaList as $cinema)
                 {
-                    echo '<option value=".$cinema["name"]"</option>';
+                    echo '<option value=".$cinema["id"]"</option>';
                 }
             ?>
         </select> 

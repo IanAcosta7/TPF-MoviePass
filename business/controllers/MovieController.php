@@ -22,9 +22,6 @@ class MovieController {
 
     public function Index($filterGenre = null) {
         $custom_css = 'movie-list.css';
-        
-        Database::connect();
-        print_r(Database::execute('get_genres'));
 
         if($filterGenre == 'default')
             $filterGenre = null;
@@ -33,8 +30,7 @@ class MovieController {
         require('./presentation/listMovies.php');
     }
 
-    public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null)
-    {
+    public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null){
         $custom_css = "movie-list.css";
 
         if($filterGenre == 'default')
@@ -49,14 +45,11 @@ class MovieController {
     }
 
     public function addShowForm($idMovie){
-
        $cinemaList = $this->CinemaDAO->GetAll();
        require_once("./presentation/addShowForm.php");
     }
     
     public function addShow($cinema, $date, $time, $idMovie){
-            $show=new Show($date, $time, $cinema, $idMovie);
-            $this->showDAO->add($show);
-            
-     }
+        $this->showDAO->add($date, $time, $cinema, $idMovie);
+    }
 }

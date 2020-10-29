@@ -1,6 +1,7 @@
 <?php namespace DAO;
 
 use models\Show;
+use DAO\Database;
 
 class ShowDAO {
     private $shows = array();
@@ -12,9 +13,10 @@ class ShowDAO {
         return $this->shows;
     }
 
-    public function add($show)
+    public function add($date, $time, $cinema, $idMovie)
     {
-        //implemetar BDD
+        Database::connect();
+        Database::execute('add_show', array($date, $time, $idMovie, $cinema));
     }
 
     private function RetrieveData()
