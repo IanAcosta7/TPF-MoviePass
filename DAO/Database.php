@@ -1,21 +1,25 @@
 <?php namespace DAO;
 
-class Database {
-    private static $conn;
-    public static function connect() {
-        Database::$conn = mysqli_connect(DB_SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+use \PDO;
 
-        if (!Database::$conn) {
-            die("Database Connection failed:" . mysqli_connect_error());
-        }
+class Database {
+    private static $pdo;
+
+    public static function connect() {
+        try {
+            Database::$pdo = new PDO("mysql:host=". DB_SERVERNAME ."; dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+            Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch(Exception $e) {
+            die('Error en la base de datos: ' . $e);
+        }   
     }
 
     public static function execute($procedure){
-        $result = mysqli_query(Database::$conn, 'CALL ' . $procedure . '()');
-        if(!$result){
-            echo mysqli_error(Database::$conn);
-        }
-        return mysqli_store_result(Database::$conn);
+        $statement = Database::$pdo->prepare("CALL ". $procedure ."()");
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+        return $result;
     }
 }
 
