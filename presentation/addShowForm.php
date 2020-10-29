@@ -1,6 +1,8 @@
-<?php 
+<?php
+    require_once("header.php");
+    require_once("navbar.php");
+?>
 
-    $idMovie = $_POST['id'];?>
      
     <form action="<?php echo ROOT_CLIENT?>Movie/addShow" method="POST">
 
@@ -9,7 +11,7 @@
             <?php 
                 foreach($cinemaList as $cinema)
                 {
-                    echo "<option value=".$cinema['name']"</option>";
+                    echo '<option value=".$cinema["name"]"</option>';
                 }
             ?>
         </select> 
@@ -20,12 +22,13 @@
         <label for="time">Horario</label>
         <input type="time" name="time" required> 
 
-        <input type="hidden" name="id" value= <?php$idMovie?> required> 
+        <input type="hidden" name="idMovie" value= "<?php echo $idMovie ?>" required> 
 
-        <button type="submit" name="submit" value=1>Finalizar</button>
-        <button type="submit" name="submit" value=0>Cargar otro</button>
-    
+        <button type="submit" >Finalizar</button>
+        
     </form>
+
+<?php require_once("footer.php"); ?> 
      
 
 

@@ -3,7 +3,7 @@
      include_once("navbar.php");
 ?>
      <main class="movies">
-          <form class="movie-filters" action="<?php echo ROOT_CLIENT?>movie/" method="post"  class="">
+          <form class="movie-filters" action="<?php echo ROOT_CLIENT?>movie/" method="post">
                <strong>Filtros:</strong>
                <select name="filterGenres" id="">
                     <option value='default'>Todas</option>

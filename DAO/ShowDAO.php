@@ -12,6 +12,11 @@ class ShowDAO {
         return $this->shows;
     }
 
+    public function add($show)
+    {
+        //implemetar BDD
+    }
+
     private function RetrieveData()
     {
         $this->shows = array();

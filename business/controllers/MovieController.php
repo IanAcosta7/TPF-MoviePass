@@ -3,15 +3,21 @@
 use DAO\MovieDAO;
 use DAO\GenreDAO;
 use DAO\Database;
+use DAO\ShowDAO;
+use DAO\CinemaDAO;
 
 class MovieController {
 
     private $movieDAO;
     private $genres;
+    private $showDAO;
+    private $CinemaDAO;
 
     public function __construct() {
         $this->movieDAO = new MovieDAO();
         $this->genresDAO = new genreDAO();
+        $this->showDAO= new ShowDAO();
+        $this->CinemaDAO= new CinemaDAO();
     }
 
     public function Index($filterGenre = null) {
@@ -46,16 +52,15 @@ class MovieController {
         require_once("./presentation/addShow.php");
     }
 
-    public function addShowForm(){
+    public function addShowForm($idMovie){
 
        $cinemaList = $this->CinemaDAO->GetAll();
        require_once("./presentation/addShowForm.php");
     }
     
-    public function addShow($cinema, $date, $time, $id, $submit){
-        if($submit == 0)
-            require_once("./presentation/addShowForm.php");
-        else
-            $this->Index();
+    public function addShow($cinema, $date, $time, $idMovie){
+            $show=new Show($date, $time, $cinema, $idMovie);
+            $this->showDAO->add($show);
+            
      }
 }
