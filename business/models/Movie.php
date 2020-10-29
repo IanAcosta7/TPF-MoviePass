@@ -3,12 +3,10 @@ namespace business\models;
 
 class Movie{
 	
+	private $id;
 	private $poster_path;
 	private $popularity;
 	private $vote_count;
-	private $video;
-    private $media_type;
-    private $id;
 	private $adult;
 	private $backdrop_path;
 	private $original_language;
@@ -19,6 +17,13 @@ class Movie{
 	private $overview;
     private $release_date;
 
+    public function getId(){
+		return $this->id;
+	}
+
+	public function setId($id){
+		$this->id = $id;
+	}
 
     public function getPoster_path(){
 		return $this->poster_path;
@@ -42,30 +47,6 @@ class Movie{
 
 	public function setVote_count($vote_count){
 		$this->vote_count = $vote_count;
-	}
-
-	public function getVideo(){
-		return $this->video;
-	}
-
-	public function setVideo($video){
-		$this->video = $video;
-	}
-
-	public function getMedia_type(){
-		return $this->media_type;
-	}
-
-	public function setMedia_type($media_type){
-		$this->media_type = $media_type;
-    }
-    
-    public function getId(){
-		return $this->id;
-	}
-
-	public function setId($id){
-		$this->id = $id;
 	}
 
 	public function getAdult(){

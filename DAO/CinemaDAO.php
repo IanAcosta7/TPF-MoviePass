@@ -53,7 +53,7 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $cinema = new Cinema($valuesArray["capacity"], $valuesArray["name"], $valuesArray["address"]);
+                    $cinema = new Cinema($valuesArray["id"], $valuesArray["capacity"], $valuesArray["name"], $valuesArray["address"]);
 
                     array_push($this->cinemaList, $cinema);
                 }
