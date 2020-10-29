@@ -3,17 +3,27 @@ namespace business\models;
 
 class Cinema {
 	
+	private $id;
 	private $capacity;
 	private $name;
 	private $address;
 	
 
-	function __construct($capacity, $name, $address){
+	function __construct($id, $capacity, $name, $address){
+		$this->id = $id;
 		$this->capacity = $capacity;
 		$this->name = $name;
 		$this->address = $address;
     }
-    
+
+	public function getId() {
+		return $this->id;
+	}
+
+	public function setId($id) {
+		$this->id = $id;
+	}
+
     public function getCapacity(){
 		return $this->capacity;
 	}
