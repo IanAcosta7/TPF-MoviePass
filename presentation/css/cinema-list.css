@@ -1,0 +1,30 @@
+.cinema-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.cinema-card {
+    text-align: center;
+
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+
+    margin: 0.5rem;
+    padding: 2rem 0;
+}
+
+.cinema-delete-btn {
+    background-color: rgb(212, 43, 43);
+}
+
+.cinema-delete-btn:hover {
+    background-color: rgb(165, 36, 36);
+}
+
+.cinema-delete-btn:focus {
+    background-color: rgb(136, 22, 22);
+}
+
+.cinema-info {
+    margin: 0.5rem;
+}

@@ -47,7 +47,7 @@ button {
     border-radius: 0.15rem;
     padding: 0.4rem;
 
-    transition: all 0.2s;
+    transition: background-color 0.2s;
 }
 
 button:focus, button:hover {

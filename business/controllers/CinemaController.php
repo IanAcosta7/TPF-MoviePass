@@ -11,21 +11,19 @@ class CinemaController{
         $this->cinemaDAO = new CinemaDAO();
     }
 
-    public function Index() {
+    public function Index($name = null) {
+        $custom_css = 'cinema-list.css';
+
+        if ($name)
+            $this->cinemaDAO->Delete($name);
+
         $cinemas = $this->cinemaDAO->GetAll();
         require_once("./presentation/listCinemas.php");   
     }
 
-    public function Delete($name = null) {
-        if ($name)
-            $this->cinemaDAO->Delete($name);
-
-        $this->Index();  
-    }
-
-    public function addCinema($capacity = null, $name = null, $address = null) {
-        if ($capacity && $name && $address) {
-            $cinema = new Cinema($capacity, $name, $address);
+    public function addCinema($capacity = null, $name = null, $address = null, $id = null) {
+        if ($id && $capacity && $name && $address) {
+            $cinema = new Cinema($id, $capacity, $name, $address);
     
             $this->cinemaDAO->Add($cinema);
 

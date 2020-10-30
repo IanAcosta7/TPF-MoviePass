@@ -31,6 +31,7 @@
 
             foreach($this->cinemaList as $cinema)
             {
+                $valuesArray["id"] = $cinema->getId();
                 $valuesArray["capacity"] = $cinema->getCapacity();
                 $valuesArray["name"] = $cinema->getName();
                 $valuesArray["address"] = $cinema->getAddress();
@@ -62,23 +63,21 @@
             }
         }
 
-        public function Delete($name){
-            
+        public function Delete($id){
             $this->RetrieveData();
 
-            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use ($name) {
-                return $cinema->getName() != $name;
+            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use ($id) {
+                return $cinema->getId() != $id;
             });
 
             $this->SaveData();
         }
 
-        public function Update($name, $cinema){
-
+        public function Update($id, $cinema){
             $this->RetrieveData();
 
-            $this->cinemaList = array_map( function($cine) use ($name, $cinema) {
-               return $cine->getName() == $name ? $cinema : $cine;
+            $this->cinemaList = array_map( function($cine) use ($id, $cinema) {
+               return $cine->getId() == $id ? $cinema : $cine;
             }, $this->cinemaList);
 
             $this->SaveData();

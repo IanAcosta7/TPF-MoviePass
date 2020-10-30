@@ -3,34 +3,29 @@
     include_once("navbar.php");
 ?>
 
-    <table border=1>
-        <thead>
-            <th>Capacidad</th>
-            <th>Nombre</th>
-            <th>Direccion</th>
-        </thead>
-        <tbody>
-            <form action="<?=ROOT_CLIENT?>cinema/delete" method="POST">
-                <?php
-                    if(isset($cinemas)){
-                        foreach($cinemas as $Cinema){
-                ?>
-                <tr>
-                    <td><?= $Cinema->getCapacity(); ?></td>
-                    <td><?= $Cinema->getName(); ?></td>
-                    <td><?= $Cinema->getAddress(); ?></td>
-                    <td>
-                        <button type="submit" name="nombre" value=<?= $Cinema->getName(); ?>> Eliminar</button>
-                    <td>                                             
-                </tr>
-                <?php
-                        }
-                    }
-                ?>
-            </form>          
-        </tbody>
-    </table>
+    <main>
+        <a href="<?=ROOT_CLIENT?>cinema/addCinema">Nuevo cine</a>
 
-    <a href="<?=ROOT_CLIENT?>cinema/addCinema">Añadir Cine</a>
+        <div class="cinema-list">
+            <?php
+                if(isset($cinemas)){
+                    foreach($cinemas as $cinema){
+                        echo '
+                            <div class="cinema-card">
+                                <h3 class="cinema-info">'. $cinema->getName() .'</h3>
+                                <p class="cinema-info">'. $cinema->getAddress() .'</p>
+                                <p class="cinema-info"><small>Capacidad: '. $cinema->getCapacity() .'</small></p>
+
+                                <form action="'.ROOT_CLIENT.'cinema" method="POST">
+                                    <input type="hidden" name="id" value="'. $cinema->getId() .'">
+                                    <button class="cinema-delete-btn" type="submit">Eliminar</button>
+                                </form>          
+                            </div>
+                        ';
+                    }
+                }
+            ?>
+        </div>
+    </main>
 
 <?php include_once("footer.php");?>
