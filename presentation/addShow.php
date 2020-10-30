@@ -1,4 +1,8 @@
 <?php 
+     $navbarButtons = '
+          <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie">Cancelar</a>
+     ';
+
      require_once("header.php");
      require_once("navbar.php");
 ?>
@@ -6,25 +10,33 @@
 
     <main class="movies">
           <form class="movie-filters" action="<?php echo ROOT_CLIENT?>movie/showAdd" method="POST">
-               <label for="filterGenre">Genero</label>
-               <select name="genre" id="genre">
-               <option value='default'>Todas</option>
-                    <?php 
-                         foreach($genres as $genre)
-                         {
-                              echo "<option value=".$genre['name'].">".$genre['name']."</option>";
-                         }
-                    ?>
-               </select>
-               <br>
-               <label for="FilterName">Nombre</label>
-               <input type="text" name="FilterName">
-               <br>
-               <label for="filterDateFrom">Desde</label>
-               <input type="date" name="filterDateFrom">
-               <br>
-               <label for="filterDateTo">Hasta</label>
-               <input type="date" name="filterDateTo">
+               <label for="filterGenre">
+                    <span>Genero</span>
+                    <select name="genre" id="genre">
+                         <option value='default'>Todas</option>
+                         <?php 
+                              foreach($genres as $genre)
+                              {
+                                   echo "<option value=".$genre['name'].">".$genre['name']."</option>";
+                              }
+                         ?>
+                    </select>
+               </label>
+
+               <label for="FilterName">
+                    <span>Nombre</span>
+                    <input type="text" name="FilterName">
+               </label>
+
+               <label for="filterDateFrom">
+                    <span>Desde</span>
+                    <input type="date" name="filterDateFrom">
+               </label>
+
+               <label for="filterDateTo">
+                    <span>Hasta</span>
+                    <input type="date" name="filterDateTo">
+               </label>
 
                <button type="submit">Filtrar</button>
                     
@@ -90,7 +102,10 @@
                               foreach($data as $Movie) {
                                    echo '
                                         <div class="card-box">
-                                             <img class="card-poster" src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path() .'">
+                                             <div>
+                                                  <img class="card-poster" src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path() .'">
+                                                  <button class="add-movie-btn" type="submit">Agregar a Cartelera</button>
+                                             </div>
                                              <div class="card-info">
                                                   <h3>'. $Movie->getTitle() .'</h3>
                                                   <div>'. $Movie->getOriginal_title() .'</div>
@@ -115,7 +130,6 @@
                                                   </ul>
                                                   <small class="card-date">'. $Movie->getRelease_date() .'</small>
                                                   <input type="hidden" name= "idMovie" value='.$Movie->getId().'>
-                                                  <button type="submit">Agregar funcion</button>
                                              </div>
                                         </div>
                                    ';

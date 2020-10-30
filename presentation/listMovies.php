@@ -1,19 +1,26 @@
 <?php 
+     $navbarButtons = '
+          <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie/showAddMovie">Agregar una pelicula</a>
+     ';
+
      include_once("header.php");
      include_once("navbar.php");
 ?>
      <main class="movies">
           <form class="movie-filters" action="<?php echo ROOT_CLIENT?>movie/" method="post">
-               <strong>Filtros:</strong>
-               <select name="filterGenres" id="">
-                    <option value='default'>Todas</option>
-                    <?php 
-                         foreach($genres as $genre)
-                         {
-                              echo "<option value=".$genre['name'].">".$genre['name']."</option>";
-                         }
-                    ?>
-               </select>
+               <label for="filterGenre">
+                    <span>Género</span>
+                    <select name="filterGenres" id="">
+                         <option value='default'>Todas</option>
+                         <?php 
+                              foreach($genres as $genre)
+                              {
+                                   echo "<option value=".$genre['name'].">".$genre['name']."</option>";
+                              }
+                         ?>
+                    </select>
+               </label>
+
                <button type="submit">Filtrar</button>
           </form>
 

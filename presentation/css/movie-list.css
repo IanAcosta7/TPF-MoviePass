@@ -12,9 +12,23 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+@media (max-device-width: 1500px) {
+    .movie-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-device-width: 1000px) {
+    .movie-list {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
 .card-box {
     border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.5rem;
+    border-radius: 0.2rem;
     margin: 0.2rem;
     position: relative;
 
@@ -22,7 +36,7 @@
     grid-template-columns: 1fr 4fr;
 }
 
-.card-poster {
+.card-poster, .add-movie-btn {
     width: 10rem;
 }
 
@@ -35,4 +49,11 @@
 
     right: 1rem;
     bottom: 1rem;
+}
+
+.add-movie-btn {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: 0;
 }

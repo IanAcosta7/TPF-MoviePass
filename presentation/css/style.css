@@ -1,3 +1,11 @@
+@import url('navbar.css');
+
+:root {
+    --main-color: #6d73c0;
+    --main-color-darker-1: #51558f;
+    --main-color-darker-2: rgb(50, 52, 87);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +24,7 @@ input {
     border: none;
     outline: none;
     border-radius: 0.1rem;
-    border-bottom: 0.1rem solid #6d72c0;
+    border-bottom: 0.1rem solid var(--main-color);
 
     transition: all 0.1s;
 }
@@ -28,10 +36,14 @@ input:focus, input:hover {
 button {
     font-size: 1.2rem;
     font-weight: bold;
+
     color: white;
-    background-color: #6d72c0;
+    background-color: var(--main-color);
+
+    cursor: pointer;
     outline: none;
     border: none;
+    
     border-radius: 0.15rem;
     padding: 0.4rem;
 
@@ -44,16 +56,4 @@ button:focus, button:hover {
 
 button:active {
     background-color: rgb(50, 52, 87);
-}
-
-.navbar {
-    text-align: right;
-    height: 8%;
-    background-color: #51558f;
-    color: white;
-}
-
-.navbar-btn:visited {
-    color: white;
-    text-decoration: none;
 }
