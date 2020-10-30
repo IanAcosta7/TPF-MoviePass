@@ -51,9 +51,9 @@ button {
 }
 
 button:focus, button:hover {
-    background-color:#51558f;
+    background-color: var(--main-color-darker-1);
 }
 
 button:active {
-    background-color: rgb(50, 52, 87);
+    background-color: var(--main-color-darker-2);
 }
