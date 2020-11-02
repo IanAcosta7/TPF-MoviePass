@@ -32,15 +32,15 @@ class MovieController {
 
     public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null){
         $custom_css = "movie-list.css";
-
-        if($filterGenre == 'default')
-            $filterGenre = null;
-        if($filterDateFrom == null)
-            $filterDateFrom = null;
-        if($filterDateTo == null)
-            $filterDateTo = date("Y-m-d");
-        $data = $this->movieDAO->GetAll();
-        $genres = $this->genresDAO->GetAll();        
+        if($filter)
+            if($filterGenre == 'default')
+                $filterGenre = null;
+            if($filterDateFrom == null)
+                $filterDateFrom = null;
+            if($filterDateTo == null)
+                $filterDateTo = date("Y-m-d");
+            $data = $this->movieDAO->GetAll();
+            $genres = $this->genresDAO->GetAll();        
         require_once("./presentation/addShow.php");
     }
 
@@ -50,6 +50,7 @@ class MovieController {
     }
     
     public function addShow($idCinema, $date, $time, $ticketValue, $idMovie){
-        $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
+        if($idCinema != "" && $date != "" && $time != "" && $ticketValue != "" && $idMovie != "")
+            $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
     }
 }
