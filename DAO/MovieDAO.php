@@ -1,9 +1,12 @@
 <?php
     namespace DAO;
 
-    use DAO\IMovieDAO as IMovieDAO;
-    use business\models\Movie as Movie;
+    use DAO\IMovieDAO;
+    use DAO\GenreDAO;
     use DAO\Database;
+    use business\models\Movie;
+    use business\models\Genre;
+    
     require_once("./config/ENV.php");
 
     class MovieDAO implements IMovieDAO
@@ -21,26 +24,63 @@
 
         public function GetAll()
         {
-            $this->RetrieveData();
-            //$this->saveInDatabase();
+            $this->FetchAll();
             return $this->movieList;
         }
 
+        public function FetchAll() {
+            $this->RetrieveData();
+            $this->saveInDatabase();
+        }
+
         private function saveInDatabase(){
-            $data = Database::execute('get_movies');
-            $array = array_filter($this->movies, function ($movies){
-                $flag = false;
-                foreach ($data as $value) {
-                    if($value == $movie){
-                        $flag = true;
-                    }
+            Database::connect();
+
+            // Busco si existen nuevos generos
+            $genreDAO = new GenreDAO();
+            $genreDAO->FetchAll();
+
+            // Agarro las peliculas de la DB
+            $DBMovies = $this->getDBMovies();
+
+            // Agarro las peliculas de la API que no esten en la DB
+            $APIMovies = array_filter($this->movieList, function ($movie) use($DBMovies){
+                $flag = true;
+                foreach ($DBMovies as $value) {
+                    if($value->getId() == $movie->getId())
+                        $flag = false;
                 }
                 return $flag;
             });
-            if(count($array) > 0){
-                Database::execute('set_movies', $array);
+
+            // Por cada pelicula que no este en la DB la guardo
+            foreach ($APIMovies as $movie) {
+                Database::execute('add_movie',
+                    'IN',
+                    array(
+                        $movie->getId(),
+                        $movie->getPopularity(),
+                        $movie->getVote_count(),
+                        $movie->getPoster_path(),
+                        $movie->getAdult(),
+                        $movie->getBackdrop_path(),
+                        $movie->getOriginal_language(),
+                        $movie->getOriginal_title(),
+                        $movie->getTitle(),
+                        $movie->getVote_average(),
+                        $movie->getOverview(),
+                        $movie->getRelease_date()
+                    )
+                );
+
+                foreach ($movie->getGenres() as $genre) {
+                    Database::execute('add_movie_genre', 'IN', array($movie->getId(), $genre->getId()));
+                }
             }
+            
+            $this->movieList = array_merge($DBMovies, $APIMovies);
         }
+        
         private function SaveData()
         {
             $arrayToEncode = array();
@@ -55,7 +95,7 @@
                 $valuesArray["backdrop_path"] = $movie->getBackdrop_path();
                 $valuesArray["original_language"] = $movie->getOriginal_language();
                 $valuesArray["original_title"] = $movie->getOriginal_title();
-                $valuesArray["genre_ids"] = $movie->getGenre_ids();
+                $valuesArray["genre_ids"] = $movie->getGenres();
                 $valuesArray["title"] = $movie->getTitle();
                 $valuesArray["vote_average"] = $movie->getVote_average();
                 $valuesArray["overview"] = $movie->getOverview();
@@ -78,30 +118,66 @@
                 $LIST = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 
                 $arrayToDecode = $LIST["results"];
-                
+
+                $genreDAO = new GenreDAO();
+                $genres = $genreDAO->getAll();
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $movie = new movie();
-                    $movie->setPoster_path( $valuesArray["poster_path"]);
-                    $movie->setPopularity( $valuesArray["popularity"]);
-                    $movie->setVote_count( $valuesArray["vote_count"]);
-                    $movie->setId( $valuesArray["id"]);
-                    $movie->setAdult( $valuesArray["adult"]);
-                    $movie->setBackdrop_path( $valuesArray["backdrop_path"]);
-                    $movie->setOriginal_language( $valuesArray["original_language"]);
-                    $movie->setOriginal_title( $valuesArray["original_title"]);
-                    $movie->setGenre_ids( $valuesArray["genre_ids"]);
-                    $movie->setTitle( $valuesArray["title"]);
-                    $movie->setVote_average( $valuesArray["vote_average"]);
-                    $movie->setOverview( $valuesArray["overview"]);
-                    $movie->setRelease_date( $valuesArray["release_date"]);
+                    $movie = new Movie(
+                        $valuesArray["id"],
+                        $valuesArray["poster_path"],
+                        $valuesArray["popularity"],
+                        $valuesArray["vote_count"],
+                        $valuesArray["adult"],
+                        $valuesArray["backdrop_path"],
+                        $valuesArray["original_language"],
+                        $valuesArray["original_title"],
+                        array_filter($genres, function ($genre) use ($valuesArray) {
+                            return in_array($genre->getId(), $valuesArray["genre_ids"]);
+                        }),
+                        $valuesArray["title"],
+                        $valuesArray["vote_average"],
+                        $valuesArray["overview"],
+                        $valuesArray["release_date"]
+                    );
 
                     array_push($this->movieList, $movie);
                 }
             }catch(Exception $e){
                 print_r($e);
             }
+        }
+
+        private function getDBMovies() {
+            $DBMovies = Database::execute('get_movies', 'OUT');
+
+
+            $DBMovies = array_map(function ($movie) {
+                $genres = Database::execute('get_genres_of_movie', 'OUT', array($movie["id_movie"]));
+
+                $genres = array_map(function ($genre) {
+                    return new Genre($genre['id_genre'], $genre['genre_name']);
+                }, $genres);
+
+                return new Movie(
+                    $movie["id_movie"],
+                    $movie["poster_path"],
+                    $movie["popularity"],
+                    $movie["vote_count"],
+                    $movie["adult"],
+                    $movie["backdrop_path"],
+                    $movie["original_language"],
+                    $movie["original_title"],
+                    $genres,
+                    $movie["title"],
+                    $movie["vote_average"],
+                    $movie["overview"],
+                    $movie["release_date"]
+                );
+            }, $DBMovies);
+
+            return $DBMovies;
         }
     }
 ?>

@@ -9,7 +9,7 @@
     
 
     <main class="movies">
-          <form class="movie-filters" action="<?php echo ROOT_CLIENT?>movie/showAdd" method="POST">
+          <form class="movie-filters" action="<?php echo ROOT_CLIENT?>Movie/showAddMovie" method="POST">
                <label for="filterGenre">
                     <span>Genero</span>
                     <select name="genre" id="genre">
@@ -17,7 +17,10 @@
                          <?php 
                               foreach($genres as $genre)
                               {
-                                   echo "<option value=".$genre['name'].">".$genre['name']."</option>";
+                                   if ($filterGenre)
+                                        $checked = $genre->getId() == $filterGenre ? 'selected' : '';
+                                        
+                                   echo '<option value="'.$genre->getId().'" '. $checked .' >'.$genre->getName().'</option>';
                               }
                          ?>
                     </select>
@@ -45,60 +48,44 @@
                <div class="movie-list">
                     <?php
                          if(isset($data)) {
-                              if($filterGenre != null) {
-                                   $data = array_filter($data, function($var) use ($filterGenre, $genres) {
+                              if($filterGenre != null || $filterDateFrom != null || $filterDateTo != null || $filterName!=date("Y-m-d")) {
+                                   $data = array_filter(
+                                        $data,
+                                        function($var)
+                                        use ($filterGenre,$filterName, $filterDateFrom, $filterDateTo)
+                                   {
                                         $flag = false;
-                                        foreach($var->getGenre_ids() as $genre) {
-                                             foreach ($genres as $value) {
-                                                  if ($genre == $value['id'] && $value['name'] == $filterGenre)
-                                                       $flag = true;   
+                                        $flagGenre=true;
+                                        $flagDate=true;
+                                        $flagName=true;
+
+                                        if($filterGenre != null) {
+                                             $flagGenre=false;
+                                             foreach ($var->getGenres() as $genre) {
+                                                  if ($genre->getId() == $filterGenre)
+                                                       $flagGenre = true;   
                                              }
                                         }
+
+                                        if($filterName != null ) {
+                                             $pos= strpos($var->getTitle(),$filterName);
+                                             $flagName=false;
+                                             if($pos!==false)
+                                                  $flagName=true;
+                                        }
+
+                                        if($filterDateFrom !=null || $filterDateFrom !=null) {
+                                             $flagDate=false;
+                                             if($filterDateFrom > $var->getRelease_date() &&  $var->getRelease_date()> $filterDateTo)
+                                                  $flagDate= true;
+                                        }
+
+                                        if($flagGenre==true && $flagDate==true && $flagName==true)
+                                             $flag=true;
+
                                         return $flag;
                                    });  
                               }
-                         
-                              if (isset($data)) {
-                                   if($filterGenre != null || $filterDateFrom != null || $filterDateTo != null || $filterName!=date("Y-m-d")) {
-                                        $data = array_filter(
-                                             $data,
-                                             function($var)
-                                             use ($filterGenre,$filterName, $filterDateFrom, $filterDateTo ,$genres)
-                                        {
-                                             $flag = false;
-                                             $flagGenre=true;
-                                             $flagDate=true;
-                                             $flagName=true;
-
-                                             if($filterGenre != null) {
-                                                  $flagGenre=false;
-                                                  foreach ($var->getGenre_ids() as $genre) {
-                                                       foreach ($genres as $value) {
-                                                            if ($genre == $value['id'] && $value['name'] == $filterGenre)
-                                                                 $flagGenre = true;   
-                                                       }
-                                                  }
-                                             }
-                                             if($filterName != null ) {
-                                                  $pos= strpos($var->getTitle(),$filterName);
-                                                  $flagName=false;
-                                                  if($pos!==false)
-                                                       $flagName=true;
-                                             }
-
-                                             if($filterDateFrom !=null || $filterDateFrom !=null) {
-                                                  $flagDate=false;
-                                                  if($filterDateFrom > $var->getRelease_date() &&  $var->getRelease_date()> $filterDateTo)
-                                                       $flagDate= true;
-                                             }
-
-                                             if($flagGenre==true && $flagDate==true && $flagName==true)
-                                                  $flag=true;
-
-                                             return $flag;
-                                        });  
-                                   }
-                              }     
                               foreach($data as $Movie) {
                                    echo '
                                         <div class="card-box">
@@ -118,11 +105,8 @@
                                                        <li>
                                    ';
                                                        
-                                   foreach ($Movie->getGenre_ids() as $genre) {
-                                        foreach ($genres as $value) {
-                                             if ($genre == $value['id'])
-                                                  echo $value['name'] . ' ';
-                                        }
+                                   foreach ($Movie->getGenres() as $genre) {
+                                        echo $genre->getName() . ' ';
                                    }
 
                                    echo '

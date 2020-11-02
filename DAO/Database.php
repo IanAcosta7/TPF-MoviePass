@@ -17,22 +17,26 @@ class Database {
     }
 
 
-    public static function execute($procedure, $array = ''){
+    public static function execute($procedure, $type, $array = ''){
+        $parameters = "";
         if($array != '') {
             $array = array_map(function ($value) {
                 return '"'. $value .'"';
             }, $array);
             
-            $array = implode(',', $array);
+            $parameters = implode(',', $array);
         }
+        
+        $query = "CALL ". $procedure ."(" . $parameters . ")";
 
-        $query = "CALL ". $procedure ."(" . $array . ")";
-        echo $query;
         $statement = Database::$pdo->prepare($query);
         $statement->execute();
 
-        $result = $statement->fetchAll();
-        return $result;
+        if ($type === 'OUT') {
+            $result = $statement->fetchAll();
+    
+            return $result;
+        }
     }
 }
 

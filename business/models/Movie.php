@@ -15,7 +15,23 @@ class Movie{
 	private $title;
 	private $vote_average;
 	private $overview;
-    private $release_date;
+	private $release_date;
+	
+	public function __construct($id, $poster_path, $popularity, $vote_count, $adult, $backdrop_path, $original_language, $original_title, $genre_ids, $title, $vote_average, $overview, $release_date) {
+		$this->id = $id;
+		$this->poster_path = $poster_path;
+		$this->popularity = $popularity;
+		$this->vote_count = $vote_count;
+		$this->adult = $adult;
+		$this->backdrop_path = $backdrop_path;
+		$this->original_language = $original_language;
+		$this->original_title = $original_title;
+		$this->genre_ids = $genre_ids;
+		$this->title = $title;
+		$this->vote_average = $vote_average;
+		$this->overview = $overview;
+		$this->release_date = $release_date;
+	}
 
     public function getId(){
 		return $this->id;
@@ -81,7 +97,7 @@ class Movie{
 		$this->original_title = $original_title;
 	}
 
-	public function getGenre_ids(){
+	public function getGenres(){
 		return $this->genre_ids;
 	}
 

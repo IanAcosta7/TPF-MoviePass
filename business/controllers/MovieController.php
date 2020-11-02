@@ -40,7 +40,7 @@ class MovieController {
         if($filterDateTo == null)
             $filterDateTo = date("Y-m-d");
         $data = $this->movieDAO->GetAll();
-        $genres = $this->genresDAO->GetAll();
+        $genres = $this->genresDAO->GetAll();        
         require_once("./presentation/addShow.php");
     }
 

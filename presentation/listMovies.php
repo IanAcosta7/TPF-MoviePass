@@ -15,7 +15,10 @@
                          <?php 
                               foreach($genres as $genre)
                               {
-                                   echo "<option value=".$genre['name'].">".$genre['name']."</option>";
+                                   if ($filterGenre)
+                                        $checked = $genre->getId() == $filterGenre ? 'selected' : '';
+
+                                   echo '<option value="'.$genre->getId().'" '. $checked .' >'.$genre->getName().'</option>';
                               }
                          ?>
                     </select>
@@ -28,16 +31,14 @@
                <?php
                     if(isset($data)) {
                          if($filterGenre != null) {
-                         $data = array_filter($data, function($var) use ($filterGenre, $genres) {
-                              $flag = false;
-                              foreach($var->getGenre_ids() as $genre) {
-                                   foreach ($genres as $value) {
-                                        if ($genre == $value['id'] && $value['name'] == $filterGenre)
+                              $data = array_filter($data, function($var) use ($filterGenre) {
+                                   $flag = false;
+                                   foreach($var->getGenres() as $genre) {
+                                        if ($genre->getId() == $filterGenre)
                                              $flag = true;   
                                    }
-                              }
-                              return $flag;
-                         });  
+                                   return $flag;
+                              });  
                          } 
                          foreach($data as $Movie) {
                               echo '
@@ -55,11 +56,8 @@
                                                   <li>
                               ';
                                                   
-                              foreach ($Movie->getGenre_ids() as $genre) {
-                                   foreach ($genres as $value) {
-                                        if ($genre == $value['id'])
-                                             echo $value['name'] . ' ';
-                                   }
+                              foreach ($Movie->getGenres() as $genre) {
+                                   echo $genre->getName() . ' ';
                               }
 
                               echo '
