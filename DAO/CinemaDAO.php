@@ -2,6 +2,7 @@
     namespace DAO;
 
     use DAO\ICinemaDAO;
+    use DAO\Database;
     use business\models\Cinema;
     require_once("./config/ENV.php");
 
@@ -11,23 +12,47 @@
 
         public function Add($cinema)
         {
-            $this->RetrieveData();
+            Database::connect();
             
-            array_push($this->cinemaList, $cinema);
-
-            $this->SaveData();
+            $array = Database::execute("check_cinema", "OUT", array($cinema->getName(),$cinema->getAddress()));
+            if(empty($array))
+                Database::execute("add_cinema", "IN", array($cinema->getName(), $cinema->getCapacity(), $cinema->getAddress()));
         }
-
+        
         public function GetAll()
         {
-            $this->RetrieveData();
-
-            return $this->cinemaList;
+            Database::connect();
+            
+            $DBCinemas = Database::execute("get_cinemas", "OUT");
+            $DBCinemas = array_map(function($cinema){
+                return new Cinema($cinema["id_cinema"],$cinema["capacity"],$cinema["cinema_name"],$cinema["address"]);
+            },$DBCinemas);
+            
+            return $DBCinemas;
+            
+        }
+        public function Delete($id){
+            Database::connect();
+            Database::execute("delete_cinema","IN", array($id));
         }
 
-        private function SaveData()
+        public function getCinemaById($id)
         {
-            $arrayToEncode = array();
+            Database::connect();
+            $cinema = Database::execute("get_cinema_by_id","OUT", array($id));
+            return (new Cinema($cinema["id_cinema"], $cinema["capacity"], $cinema["cinema_name"], $cinema["address"]));
+        }
+        
+        //private function saveInDatabase(Cinema $cinema){
+        //}
+        
+        
+        
+        
+        /*private function SaveData()
+        {
+            Database::connect();
+            
 
             foreach($this->cinemaList as $cinema)
             {
@@ -42,9 +67,9 @@
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
             file_put_contents('./data/cinemas.json', $jsonContent);
-        }
+        }*/
 
-        private function RetrieveData()
+        /*private function RetrieveData()
         {
             $this->cinemaList = array();
             try{
@@ -61,17 +86,8 @@
             }catch(Exception $e){
                 print_r($e);
             }
-        }
+        }*/
 
-        public function Delete($id){
-            $this->RetrieveData();
-
-            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use ($id) {
-                return $cinema->getId() != $id;
-            });
-
-            $this->SaveData();
-        }
 
         public function Update($id, $cinema){
             $this->RetrieveData();

@@ -179,5 +179,30 @@
 
             return $DBMovies;
         }
+
+        public function getMovieById($id)
+        {
+            Database::connect();
+            $Movie = Database::execute("get_movie_by_id", "OUT", array($id));
+            $genres = Database::execute('get_genres_of_movie', 'OUT', array($id));
+            return (new Movie(
+                $Movie["id_movie"],
+                $Movie["poster_path"],
+                $Movie["popularity"],
+                $Movie["vote_count"],
+                $Movie["adult"],
+                $Movie["backdrop_path"],
+                $Movie["original_language"],
+                $Movie["original_title"],
+                array_map(function ($genre){
+                    return new Genre($genre['id_genre'], $genre['genre_name']);
+                 }, $genres),
+                $Movie["title"], 
+                $Movie["vote_average"], 
+                $Movie["overview"], 
+                $Movie["release_date"]));
+            
+
+        }
     }
 ?>
