@@ -53,4 +53,13 @@ class MovieController {
         if($idCinema != "" && $date != "" && $time != "" && $ticketValue != "" && $idMovie != "")
             $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
     }
+
+    public function shows($id)
+    {
+        if($id != ""){
+            $showArrays = $showDAO->getAll();
+            $movie= $movieDAO->getMovieById($id);
+            require_once("./presentation/shows.php");
+        }
+    }
 }

@@ -35,6 +35,13 @@
             Database::connect();
             Database::execute("delete_cinema","IN", array($id));
         }
+
+        public function getCinemaById($id)
+        {
+            Database::connect();
+            $cinema = Database::execute("get_cinema_by_id","OUT", array($id));
+            return (new Cinema($cinema["id_cinema"], $cinema["capacity"], $cinema["cinema_name"], $cinema["address"]));
+        }
         
         //private function saveInDatabase(Cinema $cinema){
         //}
