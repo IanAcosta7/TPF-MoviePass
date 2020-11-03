@@ -1,7 +1,10 @@
 <?php 
     $navbarButtons = '
         <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie">Volver</a>
+<<<<<<< HEAD
         <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Cinema/addCinema">Nuevo cine</a>
+=======
+>>>>>>> 7c33a9944b3ae1a851c7a9ce8f4bcd272a6a3542
     ';
 
     include_once("header.php");
