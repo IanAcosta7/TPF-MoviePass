@@ -20,11 +20,14 @@ class MovieController {
         $this->CinemaDAO= new CinemaDAO();
     }
 
-    public function Index($filterGenre = null) {
+    public function Index($filterGenre = null, $filterDate = null) {
         $custom_css = 'movie-list.css';
 
         if($filterGenre == 'default')
             $filterGenre = null;
+        if ($filterDate == '')
+            $filterDate = null;
+
         $data = $this->showDAO->GetAll();
         $genres = $this->genresDAO->GetAll();
         require('./presentation/listMovies.php');
@@ -32,15 +35,18 @@ class MovieController {
 
     public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null){
         $custom_css = "movie-list.css";
-        if($filter)
-            if($filterGenre == 'default')
-                $filterGenre = null;
-            if($filterDateFrom == null)
-                $filterDateFrom = null;
-            if($filterDateTo == null)
-                $filterDateTo = date("Y-m-d");
-            $data = $this->movieDAO->GetAll();
-            $genres = $this->genresDAO->GetAll();        
+
+        if($filterGenre == 'default')
+            $filterGenre = null;
+        if ($filterName == '')
+            $filterName = null;
+        if($filterDateFrom== '')
+            $filterDateFrom = null;
+        if($filterDateTo == '')
+            $filterDateTo = null;
+
+        $data = $this->movieDAO->GetAll();
+        $genres = $this->genresDAO->GetAll();        
         require_once("./presentation/addShow.php");
     }
 
@@ -52,6 +58,8 @@ class MovieController {
     public function addShow($idCinema, $date, $time, $ticketValue, $idMovie){
         if($idCinema != "" && $date != "" && $time != "" && $ticketValue != "" && $idMovie != "")
             $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
+
+        header('Location: '. ROOT_CLIENT .'Movie');
     }
 
     public function shows($id)
