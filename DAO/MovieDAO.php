@@ -183,9 +183,9 @@
         public function getMovieById($id)
         {
             Database::connect();
-            $Movie = Database::execute("get_movie_by_id", "OUT", array($id));
-            $genres = Database::execute('get_genres_of_movie', 'OUT', array($id));
-            return (new Movie(
+            $Movie = Database::execute("get_movie_by_id", "OUT", array($id))[0];
+            $genres = Database::execute('get_genres_of_movie', 'OUT', array($Movie['id_movie']));
+            return new Movie(
                 $Movie["id_movie"],
                 $Movie["poster_path"],
                 $Movie["popularity"],
@@ -200,7 +200,7 @@
                 $Movie["title"], 
                 $Movie["vote_average"], 
                 $Movie["overview"], 
-                $Movie["release_date"]));
+                $Movie["release_date"]);
             
 
         }

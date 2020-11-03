@@ -57,8 +57,8 @@ class MovieController {
     public function shows($id)
     {
         if($id != ""){
-            $showArrays = $showDAO->getAll();
-            $movie= $movieDAO->getMovieById($id);
+            $showArrays = $this->showDAO->getAll();
+            $movie= $this->movieDAO->getMovieById($id);
             require_once("./presentation/shows.php");
         }
     }

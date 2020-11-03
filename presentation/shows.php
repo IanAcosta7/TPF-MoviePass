@@ -1,6 +1,6 @@
     <div class="list-cinema">
-    <h3><?php echo $Movie->getName() ?></h3>
-    <p><?php echo $Movie->getOverview() ?></p>
+    <h3><?php echo $movie->getTitle() ?></h3>
+    <p><?php echo $movie->getOverview() ?></p>
         <?php
             if(isset($showArrays)){    
                 foreach($showArrays as $show)
