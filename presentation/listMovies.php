@@ -1,6 +1,7 @@
 <?php 
      $navbarButtons = '
           <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie/showAddMovie">Agregar una pelicula</a>
+          <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Cinema/">Listado de Cines</a>
      ';
 
      include_once("header.php");
@@ -9,8 +10,15 @@
      $movies = array();
 
      foreach ($data as $show) {
-          if(!in_array($show->getMovie(), $movies)){
-               array_push($movies, $show->getMovie());
+          // Si la pelicula es posterior a la fecha actual y no se agrego todavia, se agrega al arreglo
+          if($show->getDate() >= date('Y-m-d') && !in_array($show->getMovie(), $movies)){
+               // Tambien comprobamos si la fecha filtrada es igual
+               if ($filterDate == null)
+                    array_push($movies, $show->getMovie());
+               else {
+                    if ($show->getDate() == $filterDate)
+                         array_push($movies, $show->getMovie());
+               }
           }
      }
 
@@ -31,6 +39,10 @@
                               }
                          ?>
                     </select>
+               </label>
+               <label for="filterGenre">
+                    <span>Fecha</span>
+                    <input name="filterDate" type="date">
                </label>
 
                <button type="submit">Filtrar</button>

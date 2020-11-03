@@ -1,9 +1,9 @@
 @import url('navbar.css');
 
 :root {
-    --main-color: #6d73c0;
-    --main-color-darker-1: #51558f;
-    --main-color-darker-2: rgb(50, 52, 87);
+    --main-color: #a81515;
+    --main-color-darker-1: #d43131;
+    --main-color-darker-2: #fd5656;
 }
 
 * {

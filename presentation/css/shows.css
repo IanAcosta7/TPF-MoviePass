@@ -1,0 +1,25 @@
+.movie-backdrop {
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+}
+
+.movie-overview {
+    margin-bottom: 1rem;
+}
+
+.list-cinema {
+    background-color: #ffffff9f;
+    border-radius: 0.2rem;
+
+    margin: 8rem;
+    padding: 2rem;
+}
+
+.cinema-card {
+    border-radius: 0.2rem;
+    background-color: white;
+
+    padding: 1rem;
+    margin-bottom: 0.3rem;
+}

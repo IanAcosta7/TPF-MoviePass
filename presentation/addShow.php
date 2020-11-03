@@ -1,6 +1,6 @@
 <?php 
      $navbarButtons = '
-          <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie">Cancelar</a>
+          <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie">Volver</a>
      ';
 
      require_once("header.php");
@@ -47,7 +47,7 @@
           <div class="movie-list">
                <?php
                     if(isset($data)) {
-                         if($filterGenre != null || $filterDateFrom != null || $filterDateTo != null || $filterName!=date("Y-m-d")) {
+                         if($filterGenre != null || $filterDateFrom != null || $filterDateTo != null || $filterName != null) {
                               $data = array_filter(
                                    $data,
                                    function($var)
@@ -67,15 +67,16 @@
                                    }
 
                                    if($filterName != null ) {
-                                        $pos= strpos($var->getTitle(),$filterName);
+                                        $movieName = strtolower($var->getTitle());
+                                        $pos= strpos($movieName, strtolower($filterName));
                                         $flagName=false;
                                         if($pos!==false)
                                              $flagName=true;
                                    }
 
-                                   if($filterDateFrom !=null || $filterDateFrom !=null) {
+                                   if($filterDateFrom != null || $filterDateTo !=null) {
                                         $flagDate=false;
-                                        if($filterDateFrom > $var->getRelease_date() &&  $var->getRelease_date()> $filterDateTo)
+                                        if($filterDateFrom < $var->getRelease_date() &&  $var->getRelease_date() < $filterDateTo)
                                              $flagDate= true;
                                    }
 

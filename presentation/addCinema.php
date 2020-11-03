@@ -1,5 +1,10 @@
 <?php
-require_once("header.php");
+    $navbarButtons = '
+        <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Cinema">Volver</a>
+    ';
+
+    require_once("header.php");
+    require_once("navbar.php");
 ?>
 
     <form method= "POST"> 
@@ -15,5 +20,5 @@ require_once("header.php");
     </form>
 
 <?php
-require_once("footer.php");
+    require_once("footer.php");
 ?>
