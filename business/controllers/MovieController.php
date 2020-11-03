@@ -25,7 +25,7 @@ class MovieController {
 
         if($filterGenre == 'default')
             $filterGenre = null;
-        $data = $this->movieDAO->GetAll();
+        $data = $this->showDAO->GetAll();
         $genres = $this->genresDAO->GetAll();
         require('./presentation/listMovies.php');
     }

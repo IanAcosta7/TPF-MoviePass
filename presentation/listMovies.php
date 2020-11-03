@@ -5,6 +5,15 @@
 
      include_once("header.php");
      include_once("navbar.php");
+
+     $movies = array();
+
+     foreach ($data as $show) {
+          if(!in_array($show->getMovie(), $movies)){
+               array_push($movies, $show->getMovie());
+          }
+     }
+
 ?>
      <main class="movies">
           <form class="movie-filters" action="<?php echo ROOT_CLIENT?>movie/" method="post">
@@ -29,9 +38,9 @@
 
           <div class="movie-list">
                <?php
-                    if(isset($data)) {
+                    if(isset($movies)) {
                          if($filterGenre != null) {
-                              $data = array_filter($data, function($var) use ($filterGenre) {
+                              $movies = array_filter($movies, function($var) use ($filterGenre) {
                                    $flag = false;
                                    foreach($var->getGenres() as $genre) {
                                         if ($genre->getId() == $filterGenre)
@@ -40,10 +49,16 @@
                                    return $flag;
                               });  
                          } 
-                         foreach($data as $Movie) {
+                         foreach($movies as $Movie) {
                               echo '
                                    <div class="card-box">
-                                        <img class="card-poster" src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path() .'">
+                                        <div>
+                                             <form action="' . ROOT_CLIENT .'Movie/shows" method="GET">
+                                                  <img class="card-poster" src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path() .'">
+                                                  <input name="movieId" type="hidden" value="' . $Movie->getId() . '">
+                                                  <button class="add-movie-btn" type="submit">Ver Funciones</button>
+                                             </form>
+                                        </div>
                                         <div class="card-info">
                                              <h3>'. $Movie->getTitle() .'</h3>
                                              <div>'. $Movie->getOriginal_title() .'</div>

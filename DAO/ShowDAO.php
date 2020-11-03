@@ -1,38 +1,58 @@
 <?php namespace DAO;
 
-use models\Show;
+use business\models\Show;
+use business\models\Movie;
+use business\models\Genre;
 use DAO\Database;
+
+require_once("./config/ENV.php");
+
 
 class ShowDAO {
     private $shows = array();
 
-    public function GetAll()
-    {
-        $this->RetrieveData();
-
+    public function GetAll(){
+        $this->shows = $this->getDBShows();
         return $this->shows;
     }
 
-    public function add($idCinema, $idMovie, $date, $time, $ticketValue)
-    {
+    public function add($idCinema, $idMovie, $date, $time, $ticketValue){
         Database::connect();
-        Database::execute('add_show', array($idCinema, $idMovie, $date, $time, $ticketValue));
+        Database::execute('add_show', 'IN', array($idCinema, $idMovie, $date, $time, $ticketValue));
     }
 
-    private function RetrieveData()
-    {
-        $this->shows = array();
-        try{
-            $database = new Database();
-            $database->connect();
+    private function getDBShows(){
+        Database::connect();
+        $DBShows = Database::execute('get_shows', 'OUT');
+        $DBShows = array_map(function ($show){
+            $movie = Database::execute('get_movie_by_id', 'OUT', array($show['id_movie']))[0];
+            $genres = Database::execute('get_genres_of_movie', 'OUT', array($movie['id_movie']));
+            return new Show($show['id_show'], 
+                $show['id_cinema'], 
+                new Movie(
+                    $movie["id_movie"],
+                    $movie["poster_path"],
+                    $movie["popularity"],
+                    $movie["vote_count"],
+                    $movie["adult"],
+                    $movie["backdrop_path"],
+                    $movie["original_language"],
+                    $movie["original_title"],
+                    array_map(function ($genre){
+                        return new Genre($genre['id_genre'], $genre['genre_name']);
+                    }, $genres),
+                    $movie["title"],
+                    $movie["vote_average"],
+                    $movie["overview"],
+                    $movie["release_date"]
+                ),
+                $show['show_date'],
+                $show['show_time'],
+                $show['ticket_value']
+            );
+        }, $DBShows);
 
-            // $database->execute('get_shows');
-
-            
-
-        }catch(Exception $e){
-            print_r($e);
-        }
+        return $DBShows;
     }
 }
 

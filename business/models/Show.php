@@ -2,43 +2,44 @@
 namespace business\models;
 
 class Show{
-	private $id;
-    private $idCinema;
-	private $idMovie;
+	private $idShow;
+    private $cinema;
+	private $movie;
     private $date;
 	private $time;
 	private $ticketValue;
 	
-    public function __constructor($id, $idCinema, $idMovie, $date, $time, $ticketValue){
-		$this->id = $id;
-        $this->idCinema = $idCinema;
-        $this->idMovie = $idMovie;
+    public function __construct($idShow, $cinema, $movie, $date, $time, $ticketValue){
+		$this->idShow = $idShow;
+        $this->cinema = $cinema;
+        $this->movie = $movie;
         $this->date = $date;
-        $this->time = $time;
+		$this->time = $time;
+		$this->ticketValue = $ticketValue;
 	}
 	
-	public function getId() {
-		return $this->id;
+	public function getIdShow() {
+		return $this->idShow;
 	}
 
-	public function setId($id) {
-		$this->id = $id;
+	public function setIdShow($idShow) {
+		$this->idShow = $idShow;
 	}
 
-	public function setIdCinema($idCinema){
-		$this->idCinema = $idCinema;
+	public function setIdCinema($cinema){
+		$this->cinema = $cinema;
 	}
 	
 	public function getIdCinema(){
-		return $this->idCinema;
+		return $this->cinema;
 	}
 	
-	public function setIdMovie($idMovie){
-		$this->idMovie = $idMovie;
+	public function setMovie($movie){
+		$this->movie = $movie;
 	}
 	
-	public function getIdMovie(){
-		return $this->idMovie;
+	public function getMovie(){
+		return $this->movie;
 	}
 
     public function getdate(){
@@ -57,11 +58,11 @@ class Show{
 		$this->time = $time;
 	}
 
-	private function getTicketValue() {
+	public function getTicketValue() {
 		return $this->ticketValue;
 	}
 
-	private function setTicketValue($ticketValue) {
+	public function setTicketValue($ticketValue) {
 		$this->ticketValue = $ticketValue;
 	}
 
