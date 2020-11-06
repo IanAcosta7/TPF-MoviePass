@@ -1,18 +1,16 @@
 <?php namespace DAO;
 
 use \PDO;
+use business\exceptions\DatabaseException;
 
 class Database {
     private static $pdo = null;
 
     public static function connect() {
         if(!Database::$pdo){
-            try {
-                Database::$pdo = new PDO("mysql:host=". DB_SERVERNAME ."; dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
-                Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch(Exception $e) {
-                die('Error en la base de datos: ' . $e);
-            }   
+            Database::$pdo = new PDO("mysql:host=". DB_SERVERNAME ."; dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
+            if(!Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))
+                throw new DatabaseException("Error en la conexion a la base de datos", "CONNECTION_ERROR");
         }
     }
 
@@ -28,10 +26,11 @@ class Database {
         }
         
         $query = "CALL ". $procedure ."(" . $parameters . ")";
-
+        
         $statement = Database::$pdo->prepare($query);
-        $statement->execute();
-
+        if(!$statement->execute())
+            throw new DatabaseException("Error en la ejecucion de la base de datos", "EXECUTION_ERROR");
+        
         if ($type === 'OUT') {
             $result = $statement->fetchAll();
     

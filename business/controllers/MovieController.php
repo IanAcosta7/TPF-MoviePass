@@ -27,10 +27,14 @@ class MovieController {
             $filterGenre = null;
         if ($filterDate == '')
             $filterDate = null;
-
-        $data = $this->showDAO->GetAll();
-        $genres = $this->genresDAO->GetAll();
-        require('./presentation/listMovies.php');
+            try{
+                $data = $this->showDAO->GetAll();
+                $genres = $this->genresDAO->GetAll();
+                require('./presentation/listMovies.php');
+            }catch(DatabaseException $e){
+                require_once("./presentation/error.php");
+            }
+        
     }
 
     public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null){
@@ -45,21 +49,37 @@ class MovieController {
         if($filterDateTo == '')
             $filterDateTo = null;
 
-        $data = $this->movieDAO->GetAll();
-        $genres = $this->genresDAO->GetAll();        
-        require_once("./presentation/addShow.php");
+            try{
+                $data = $this->showDAO->GetAll();
+                $genres = $this->genresDAO->GetAll();
+                $data = $this->movieDAO->GetAll();
+                $genres = $this->genresDAO->GetAll();       
+                require_once("./presentation/addShow.php");
+            }catch(DatabaseException $e){
+                require_once("./presentation/error.php");
+            }
     }
 
     public function addShowForm($idMovie){
-       $cinemaList = $this->CinemaDAO->GetAll();
-       require_once("./presentation/addShowForm.php");
+        try{
+            $cinemaList = $this->CinemaDAO->GetAll();
+            require_once("./presentation/addShowForm.php");
+        }catch(DatabaseException $e){
+            require_once("./presentation/error.php");
+        }
     }
     
     public function addShow($idCinema, $date, $time, $ticketValue, $idMovie){
         if($idCinema != "" && $date != "" && $time != "" && $ticketValue != "" && $idMovie != "")
-            $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
+        {
+            try{
+                $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
+                header('Location: '. ROOT_CLIENT .'Movie');
+            }catch(DatabaseException $e){
+                require_once("./presentation/error.php");
+            }
+        }
 
-        header('Location: '. ROOT_CLIENT .'Movie');
     }
 
     public function shows($id)
@@ -67,9 +87,13 @@ class MovieController {
         $custom_css = "shows.css";
 
         if($id != ""){
-            $showArrays = $this->showDAO->getAll();
-            $movie= $this->movieDAO->getMovieById($id);
-            require_once("./presentation/shows.php");
+            try{
+                $showArrays = $this->showDAO->getAll();
+                $movie= $this->movieDAO->getMovieById($id);
+                require_once("./presentation/shows.php");
+            }catch(DatabaseException $e){
+                require_once("./presentation/error.php");
+            }
         }
     }
 }

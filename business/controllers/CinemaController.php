@@ -13,21 +13,27 @@ class CinemaController{
 
     public function Index($id = null) {
         $custom_css = 'cinema-list.css';
+        try{
+            if ($id)
+                $this->cinemaDAO->Delete($id);
 
-        if ($id)
-            $this->cinemaDAO->Delete($id);
-
-        $cinemas = $this->cinemaDAO->GetAll();
-        require_once("./presentation/listCinemas.php");   
+            $cinemas = $this->cinemaDAO->GetAll();
+            require_once("./presentation/listCinemas.php");
+        }catch(DatabaseException $e){
+            require_once("./presentation/error.php");
+        }   
     }
 
     public function addCinema($capacity = null, $name = null, $address = null) {
         if ($capacity && $name && $address && $capacity!= "" && $name != "" && $address !="") {
             $cinema = new Cinema(null, $capacity, $name, $address);
-    
-            $this->cinemaDAO->Add($cinema);
-
-            header("Location: ". ROOT_CLIENT . "Cinema");
+            
+            try{
+                $this->cinemaDAO->Add($cinema);
+                header("Location: ". ROOT_CLIENT . "Cinema");
+            }catch(DatabaseException $e){
+                require_once("./presentation/error.php");
+            }
         } else {
             require_once("./presentation/addCinema.php");   
         }
