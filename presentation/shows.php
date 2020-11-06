@@ -22,13 +22,13 @@
                         $cinemas = $this->CinemaDAO->getCinemaById($show->getIdCinema());
     ?>                    
                             <div class="cinema-card">
-                                <h4 class="cinema-info">.<?php echo $cinemas->getName()?>.</p>     
-                                <p class="cinema-info">.<?php echo $cinemas->getAddress()?>.</p>     
-                                <h5 class="cinema-info">.<?php echo $show->getDate()?>.</h4>
-                                <h5 class="cinema-info">.<?php echo $show->getTime()?>.</h4>
-                                <h5 class="cinema-info">Valor del ticket: $.<?php echo $show->getTicketValue()?>.</h4>
+                                <h4 class="cinema-info"><?= $cinemas->getName()?></p>     
+                                <p class="cinema-info"><?= $cinemas->getAddress()?></p>     
+                                <h5 class="cinema-info"><?= $show->getDate()?></h4>
+                                <h5 class="cinema-info"><?= $show->getTime()?></h4>
+                                <h5 class="cinema-info">Valor del ticket: <?= $show->getTicketValue()?></h4>
                             </div>
-                        ;       
+    <?php
                     }
                 }
             }

@@ -11,23 +11,25 @@
     <main>
         <div class="cinema-list">
             <?php
-                if(isset($cinemas)){
-                    foreach($cinemas as $cinema){
-            ?>           
-                        <div class="cinema-card">
-                            <h3 class="cinema-info">.<?php echo$cinema->getName()?>.</h3>
-                            <p class="cinema-info">.<?php echo $cinema->getAddress()?>.</p>
-                            <p class="cinema-info"><small>Capacidad:. <?php echo $cinema->getCapacity()?>.</small></p>
+            if(isset($cinemas)){
+                foreach($cinemas as $cinema){
+            ?>   
 
-                            <form action="<?php echo ROOT_CLIENT?>cinema" method="POST">
-                                <input type="hidden" name="id" value="'. $cinema->getId() .'">
-                                <button class="cinema-delete-btn" type="submit">Eliminar</button>
-                            </form>          
-                        </div>
-                        ;
-                    }
+            <div class="cinema-card">
+                <h3 class="cinema-info"><?php echo$cinema->getName()?></h3>
+                <p class="cinema-info"><?php echo $cinema->getAddress()?></p>
+                <p class="cinema-info"><small>Capacidad: <?php echo $cinema->getCapacity()?></small></p>
+
+                <form action="<?php echo ROOT_CLIENT?>cinema" method="POST">
+                    <input type="hidden" name="id" value="<?= $cinema->getId() ?>">
+                    <button class="cinema-delete-btn" type="submit">Eliminar</button>
+                </form>          
+            </div>
+
+            <?php
                 }
-            
+            }
+            ?>
         </div>
     </main>
 
