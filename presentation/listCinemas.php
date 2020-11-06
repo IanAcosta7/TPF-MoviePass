@@ -13,21 +13,21 @@
             <?php
                 if(isset($cinemas)){
                     foreach($cinemas as $cinema){
-                        echo '
-                            <div class="cinema-card">
-                                <h3 class="cinema-info">'. $cinema->getName() .'</h3>
-                                <p class="cinema-info">'. $cinema->getAddress() .'</p>
-                                <p class="cinema-info"><small>Capacidad: '. $cinema->getCapacity() .'</small></p>
+            ?>           
+                        <div class="cinema-card">
+                            <h3 class="cinema-info">.<?php echo$cinema->getName()?>.</h3>
+                            <p class="cinema-info">.<?php echo $cinema->getAddress()?>.</p>
+                            <p class="cinema-info"><small>Capacidad:. <?php echo $cinema->getCapacity()?>.</small></p>
 
-                                <form action="'.ROOT_CLIENT.'cinema" method="POST">
-                                    <input type="hidden" name="id" value="'. $cinema->getId() .'">
-                                    <button class="cinema-delete-btn" type="submit">Eliminar</button>
-                                </form>          
-                            </div>
-                        ';
+                            <form action="<?php echo ROOT_CLIENT?>cinema" method="POST">
+                                <input type="hidden" name="id" value="'. $cinema->getId() .'">
+                                <button class="cinema-delete-btn" type="submit">Eliminar</button>
+                            </form>          
+                        </div>
+                        ;
                     }
                 }
-            ?>
+            
         </div>
     </main>
 

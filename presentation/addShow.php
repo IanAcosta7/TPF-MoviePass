@@ -86,43 +86,43 @@
                                    return $flag;
                               });  
                          }
+               
                          foreach($data as $Movie) {
-                              echo '
-                                   <div class="card-box">
-                                        <div>
-                                             <form action="' . ROOT_CLIENT . 'Movie/addShowForm" method="post">
-                                                  <img class="card-poster" src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path() .'">
-                                                  <input type="hidden" name= "idMovie" value='.$Movie->getId().'>
-                                                  <button class="add-movie-btn" type="submit">Agregar a Cartelera</button>
-                                             </form>
-                                        </div>
-                                        <div class="card-info">
-                                             <h3>'. $Movie->getTitle() .'</h3>
-                                             <div>'. $Movie->getOriginal_title() .'</div>
-                                             <!--<p>'. $Movie->getOverview() .'</p>-->
-                                             <ul>
-                                                  <li>'. $Movie->getPopularity() .'</li>
-                                                  <li>'. $Movie->getVote_average() .'</li>
-                                                  <li>'. $Movie->getVote_count() .'</li>
-                                                  <li>'. $Movie->getOriginal_language() .'</li>
-                                                  <li>
-                              ';
-                                                  
+               ?>               
+                              <div class="card-box">
+                                   <div>
+                                        <form action="<?php echo . ROOT_CLIENT?>Movie/addShowForm" method="post">
+                                             <img class="card-poster" src="https://image.tmdb.org/t/p/w500'. $Movie->getPoster_path() .'">
+                                             <input type="hidden" name= "idMovie" value='.$Movie->getId().'>
+                                             <button class="add-movie-btn" type="submit">Agregar a Cartelera</button>
+                                        </form>
+                                   </div>
+                                   <div class="card-info">
+                                        <h3>. <?php echo $Movie->getTitle() ?>.</h3>
+                                        <div>.<?php echo$Movie->getOriginal_title()?> .</div>
+                                        <!--<p>. $Movie->getOverview() .'</p>-->
+                                        <ul>
+                                             <li>.<?php echo $Movie->getPopularity()?>.</li>
+                                             <li>.<?php echo $Movie->getVote_average()?>.</li>
+                                             <li>.<?php echo $Movie->getVote_count() ?>.</li>
+                                             <li>.<?php echo $Movie->getOriginal_language() ?>.</li>
+                                             <li>
+                              ;
+                              <?php                          
                               foreach ($Movie->getGenres() as $genre) {
                                    echo $genre->getName() . ' ';
                               }
-
-                              echo '
+                              ?>
+                                   
                                              </li>
                                              </ul>
-                                             <small class="card-date">'. $Movie->getRelease_date() .'</small>
+                                             <small class="card-date">.<?php echo $Movie->getRelease_date()?>.</small>
                                         </div>
                                    </div>
                               ';
                          }
                          
                     }
-               ?>
           </div>
      </main>
 
