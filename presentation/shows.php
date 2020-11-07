@@ -1,8 +1,4 @@
 <?php
-    $navbarButtons = '
-        <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie">Volver</a>
-    ';
-
     require 'header.php';
     require 'navbar.php';
 ?>

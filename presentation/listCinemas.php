@@ -1,9 +1,4 @@
 <?php 
-    $navbarButtons = '
-        <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Movie">Volver</a>
-        <a class="navbar-btn menu-btn" href="'. ROOT_CLIENT .'Cinema/addCinema">Nuevo cine</a>
-    ';
-
     include_once("header.php");
     include_once("navbar.php");
 ?>
