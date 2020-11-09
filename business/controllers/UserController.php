@@ -2,11 +2,14 @@
 
 namespace business\controllers;
 use business\models\User as User;
+use DAO\UserDAO;
 
 class UserController {
+    
+    private $userDAO;
 
-    public function Index() {
-
+    public function __construct() {
+        $this->userDAO = new UserDAO();
     }
 
     public function register(){
@@ -18,8 +21,16 @@ class UserController {
     }
 
     public function signup($name, $email, $password) {
-        $user = new User($email, $name, $password);
+        if($name != "" && $email!="" && $password!=""){
+            try{
+                $this->userDAO->add($email, $name, $password);
+                header('Location: '. ROOT_CLIENT);
+            }catch(DatabaseException $e){
+                require_once("./presentation/error.php");
+            }
 
-        print_r($user);
+        }
+        
+
     }
 }
