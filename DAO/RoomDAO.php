@@ -16,7 +16,7 @@
             
             $array = Database::execute("check_room", "OUT", array($room->getId()));
             if(empty($array))
-                Database::execute("add_room", "IN", array($room->getName(), $room->getCapacity(), $cinema->getprice()));
+                Database::execute("add_room", "IN", array($room->getIdCinema(),$room->getName(), $room->getCapacity(), $cinema->getprice()));
         }
         
         public function GetAll()
@@ -25,7 +25,7 @@
             
             $DBRoom = Database::execute("get_room", "OUT");
             $DBRoom = array_map(function($room){
-                return new Room($room["id_room"],$room["name"],$room["capacity"],$room["price"]);
+                return new Room($room["id_cinema"], $room["id_room"],$room["name"],$room["capacity"],$room["price"]);
             },$DBRoom);
             
             return $DBRoom;
@@ -40,7 +40,7 @@
         {
             Database::connect();
             $room = Database::execute("get_room_by_id","OUT", array($id))[0];
-            return new Room($cinema["id_room"], $cinema["name"], $cinema["capacity"], $cinema["price"]);
+            return new Room($room["id_cinema"], $room["id_room"], $room["name"], $room["capacity"], $room["price"]);
         }
     }
 ?>
