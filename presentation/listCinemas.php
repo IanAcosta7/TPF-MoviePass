@@ -13,7 +13,14 @@
             <div class="cinema-card">
                 <h3 class="cinema-info"><?php echo$cinema->getName()?></h3>
                 <p class="cinema-info"><?php echo $cinema->getAddress()?></p>
-                <p class="cinema-info"><small>Capacidad: <?php echo $cinema->getCapacity()?></small></p>
+                <?php
+                foreach($cinema->getRooms() as $room)
+                {?>
+                    <p class="cinema-info"><small> Sala: <?= $room->getName()?> </small></p>
+                    <p class="cinema-info"><small> Capacidad: <?= $room->getCapacity()?> </small></p>
+                    <p class="cinema-info"><small> Precio: <?= $room->getPrice()?> </small></p>
+                <?php }?>
+                
 
                 <form action="<?php echo ROOT_CLIENT?>cinema" method="POST">
                     <input type="hidden" name="id" value="<?= $cinema->getId() ?>">

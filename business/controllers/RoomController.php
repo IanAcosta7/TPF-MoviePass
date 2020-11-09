@@ -10,10 +10,10 @@ class RoomController{
         $this->roomDAO = new RoomDAO();
     }
 
-    public function addRoom($id_cinema = null, $capacity = null, $name = null, $price = null) {
+    public function addRoom($id_cinema = null, $name = null, $capacity = null, $price = null) {
         if ($capacity && $name && $price && $capacity!= "" && $name != "" && $price !="") {
-            $room = new Room($id_cinema, null, $name, $capacity, $price);
-            
+            $room = new Room($id_cinema, $name, $capacity, $price);
+
             try{
                 $this->roomDAO->Add($room);
                 header("Location: ". ROOT_CLIENT . "Cinema");

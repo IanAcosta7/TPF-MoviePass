@@ -8,22 +8,21 @@
 
     class RoomDAO implements IRoomDAO
     {
-        private $¿roomList = array();
+        private $roomList = array();
 
         public function Add($room)
         {
             Database::connect();
-            
-            $array = Database::execute("check_room", "OUT", array($room->getId()));
+            $array = Database::execute("check_room", "OUT", array($room->getName(), $room->getIdCinema()));
             if(empty($array))
-                Database::execute("add_room", "IN", array($room->getIdCinema(),$room->getName(), $room->getCapacity(), $cinema->getprice()));
+                Database::execute("add_room", "IN", array($room->getIdCinema(),$room->getName(), $room->getCapacity(), $room->getPrice()));
         }
         
         public function GetAll()
         {
             Database::connect();
             
-            $DBRoom = Database::execute("get_room", "OUT");
+            $DBRoom = Database::execute("get_rooms", "OUT");
             $DBRoom = array_map(function($room){
                 return new Room($room["id_cinema"], $room["id_room"],$room["name"],$room["capacity"],$room["price"]);
             },$DBRoom);

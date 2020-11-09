@@ -4,6 +4,8 @@
     use DAO\ICinemaDAO;
     use DAO\Database;
     use business\models\Cinema;
+    use business\models\Room;
+    
     require_once("./config/ENV.php");
 
     class CinemaDAO implements ICinemaDAO
@@ -25,7 +27,15 @@
             
             $DBCinemas = Database::execute("get_cinemas", "OUT");
             $DBCinemas = array_map(function($cinema){
-                return new Cinema($cinema["id_cinema"],$cinema["capacity"],$cinema["cinema_name"],$cinema["address"]);
+                $DBRooms= Database::execute("get_rooms_by_cinema_id", "OUT",array($cinema["id_cinema"]));
+                return new Cinema(
+                    $cinema["id_cinema"],
+                    $cinema["capacity"],
+                    $cinema["cinema_name"],
+                    $cinema["address"],
+                    array_map(function($room){
+                        return new Room($room["id_cinema"], $room["room_name"], $room["room_capacity"], $room["room_price"], $room["id_room"]);
+                    },$DBRooms));
             },$DBCinemas);
             
             return $DBCinemas;
@@ -39,64 +49,16 @@
         public function getCinemaById($id)
         {
             Database::connect();
-            $cinema = Database::execute("get_cinema_by_id","OUT", array($id))[0];
-            return new Cinema($cinema["id_cinema"], $cinema["capacity"], $cinema["cinema_name"], $cinema["address"]);
+            $DBCinema = Database::execute("get_cinema_by_id","OUT", array($id))[0];
+            return new Cinema(
+                $cinema["id_cinema"],
+                $cinema["capacity"],
+                $cinema["cinema_name"],
+                $cinema["address"],
+                array_map(function($room){
+                    return new Room($room["id_cinema"], $room["room_name"], $room["room_capacity"], $room["room_price"], $room["id_room"]);
+                },$DBRooms));
         }
         
-        //private function saveInDatabase(Cinema $cinema){
-        //}
-        
-        
-        
-        
-        /*private function SaveData()
-        {
-            Database::connect();
-            
-
-            foreach($this->cinemaList as $cinema)
-            {
-                $valuesArray["id"] = $cinema->getId();
-                $valuesArray["capacity"] = $cinema->getCapacity();
-                $valuesArray["name"] = $cinema->getName();
-                $valuesArray["address"] = $cinema->getAddress();
-                
-                array_push($arrayToEncode, $valuesArray);
-            }
-
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
-            file_put_contents('./data/cinemas.json', $jsonContent);
-        }*/
-
-        /*private function RetrieveData()
-        {
-            $this->cinemaList = array();
-            try{
-                $jsonContent = file_get_contents('./data/cinemas.json');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
-                {
-                    $cinema = new Cinema($valuesArray["id"], $valuesArray["capacity"], $valuesArray["name"], $valuesArray["address"]);
-
-                    array_push($this->cinemaList, $cinema);
-                }
-            }catch(Exception $e){
-                print_r($e);
-            }
-        }*/
-
-
-        public function Update($id, $cinema){
-            $this->RetrieveData();
-
-            $this->cinemaList = array_map( function($cine) use ($id, $cinema) {
-               return $cine->getId() == $id ? $cinema : $cine;
-            }, $this->cinemaList);
-
-            $this->SaveData();
-        }
-    }
+    } 
 ?>
