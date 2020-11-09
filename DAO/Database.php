@@ -26,7 +26,7 @@ class Database {
         }
         
         $query = "CALL ". $procedure ."(" . $parameters . ")";
-        
+    
         $statement = Database::$pdo->prepare($query);
         if(!$statement->execute())
             throw new DatabaseException("Error en la ejecucion de la base de datos", "EXECUTION_ERROR");

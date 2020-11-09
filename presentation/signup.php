@@ -2,7 +2,7 @@
     require_once("header.php");
 ?>
     <main>
-        <form action="<?= ROOT_CLIENT?>User/signup" method="POST">
+        <form action="<?= ROOT_CLIENT?>Home/signup" method="POST">
             <label for="name">Nombre</label>
             <input type="text" name="name" placeholder="Ingrese su nombre" required>
 

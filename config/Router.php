@@ -17,10 +17,18 @@
 
             $controller = new $controllerClassName;
             
-            if(!isset($methodParameters))            
+            Router::checkSignIn($controller, $methodName, $methodParameters, $controllerName);
+        }
+
+        private static function checkSignIn($controller, $methodName, $methodParameters, $controllerName){
+            if($controllerName != 'HomeController')
+                if(!$_SESSION['user'])
+                    header('Location: ' . ROOT_CLIENT);
+            
+            if(!isset($methodParameters))    
                 call_user_func(array($controller, $methodName));
             else
-                call_user_func_array(array($controller, $methodName), $methodParameters);
+                call_user_func_array(array($controller, $methodName), $methodParameters);  
         }
     }
 ?>

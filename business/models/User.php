@@ -7,12 +7,39 @@ class User {
     private $id;
     private $email;
     private $name;
-    private $password;
+    private $isAdmin;
 
-    public function __construct($email, $name, $password, $id = null) {
+    public function __construct($email, $name, $isAdmin, $id = null) {
         $this->id = $id;
         $this->email = $email;
         $this->name = $name;
-        $this->password = $password;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function getEmail(){
+        return $this->email;
+    }
+
+    public function setEmail($email){
+        $this->email = $email;
+    }
+
+    public function getName(){
+        return $this->name;
+    }
+
+    public function setName($name){
+        $this->name = $name;
+    }
+
+    public function isAdmin($isAdmin){
+        return $this->isAdmin;
     }
 }

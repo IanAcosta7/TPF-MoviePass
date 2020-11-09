@@ -10,16 +10,27 @@ class UserDAO {
 
     public function add($email, $name, $password){
         Database::connect();
-        Database::execute('add_user', 'IN', array($email, $name, $password));
+        Database::execute('add_user', 'IN', array($email, $name, hash('sha256', $password)));
     }
 
-    private function getUserById(){
+    public function getUserById($id){
         Database::connect();
         $DBUser = Database::execute("get_user_by_id", "OUT", array($id))[0];
-        return new User($user["id_user"], $user["email_user"], $user["name_user"], $user["password_user"]);
+        return new User($user["id_user"], $user["email_user"], $user["name_user"]);
     }
 
-    private function delete($id){
+    public function signIn($email, $password){
+            Database::connect();
+            $DBUser = Database::execute("signin", "OUT", array($email, hash('sha256', $password)));
+            if(!empty($DBUser)){
+                $DBUser = $DBUser[0];
+                return new User($DBUser["id_user"], $DBUser["email_user"], $DBUser["name_user"]);
+            }
+            else
+                return null;
+    }
+
+    public function delete($id){
         Database::connect();
         Database::execute("delete_user", "IN", array($id));
     }
