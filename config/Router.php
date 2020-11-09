@@ -21,10 +21,9 @@
         }
 
         private static function checkSignIn($controller, $methodName, $methodParameters, $controllerName){
-            if($controllerName != 'HomeController')
-                if(!$_SESSION['user'])
-                    header('Location: ' . ROOT_CLIENT);
-            
+            if($controllerName != 'HomeController' && !isset($_SESSION['user']))
+                header('Location: ' . ROOT_CLIENT);
+          
             if(!isset($methodParameters))    
                 call_user_func(array($controller, $methodName));
             else

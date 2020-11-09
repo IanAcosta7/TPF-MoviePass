@@ -22,6 +22,6 @@
         ?>
     </div>
     <div class="navbar-close">
-        <a class="navbar-btn" href="">Cerrar Sesión</a>
+        <a class="navbar-btn" href="<?= ROOT_CLIENT?>Home/logout">Cerrar Sesión</a>
     </div>
 </nav>

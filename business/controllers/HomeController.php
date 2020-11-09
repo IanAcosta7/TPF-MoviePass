@@ -48,5 +48,10 @@ class HomeController {
         }
     }
 
+    public function logout(){
+        session_destroy();
+        header('Location: '.ROOT_CLIENT);
+    }
+
 }
 ?>
