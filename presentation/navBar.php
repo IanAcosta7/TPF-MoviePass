@@ -1,17 +1,22 @@
 <nav class="navbar">  
     <div class="navbar-menu">
-        <ul>
-            <li><a href="<?= ROOT_CLIENT ?>Movie">Mostrar peliculas</a></li>
-            <li><a href="<?= ROOT_CLIENT ?>">Carrito</a></li>
-            
-        </ul>
+        <div class="dropdown">
+            <label class="dropdown-label">Opciones</label>
+            <ul class="dropdown-options dropdown-menu">
+                <li><a class="drop-option" href="<?= ROOT_CLIENT ?>Movie">Mostrar peliculas</a></li>
+                <li><a class="drop-option" href="<?= ROOT_CLIENT ?>">Carrito</a></li>
+            </ul>
+        </div>
         <?php
             //if(Admin)
         ?>
-        <ul>
-            <li><a href="<?= ROOT_CLIENT ?>Cinema">Administrar Cines</a></li>
-            <li><a href="<?= ROOT_CLIENT ?>Movie/showAddMovie">Agregar Función</a></li>
-        </ul>
+        <div class="dropdown">
+            <label class="dropdown-label">Administrador</label>
+            <ul class="dropdown-options dropdown-admin">
+                <li><a class="drop-option" href="<?= ROOT_CLIENT ?>Cinema">Administrar Cines</a></li>
+                <li><a class="drop-option" href="<?= ROOT_CLIENT ?>Movie/showAddMovie">Agregar Función</a></li>
+            </ul>
+        </div>
         <?php
             //}
         ?>

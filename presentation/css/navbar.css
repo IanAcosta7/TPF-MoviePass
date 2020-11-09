@@ -1,5 +1,7 @@
 .navbar {
-    height: 5rem;
+    --navbar-size: 5rem;
+
+    height: var(--navbar-size);
     
     background-color: var(--main-color);
     color: white;
@@ -15,9 +17,6 @@
 .navbar-close {
     display: flex;
     justify-content: flex-end;
-}
-
-.navbar-menu, .navbar-close {
     margin: auto 1rem;
 }
 
@@ -32,6 +31,52 @@
     padding: 0.5rem;
 }
 
-.menu-btn {
-    margin-right: 0.4rem;
+.dropdown {
+    display: inline-flex;
+    background-color: var(--main-color);
+    position: relative;
+
+    height: 100%;
+    padding: 0rem 3rem;
+}
+
+.dropdown:hover > .dropdown-options {
+    transform: translateY(calc(var(--navbar-size) * 2));
+}
+
+.dropdown:hover {
+    background-color: var(--main-color-darker-2);
+}
+
+.dropdown-label {
+    font-weight: bold;
+    align-self: center;
+}
+
+.dropdown-options {
+    transition: transform 0.5s;
+
+    list-style: none;
+    background-color: var(--main-color-darker-2);
+    position: absolute;
+    
+    top: -100%;
+    z-index: -1;
+    left: 0;
+}
+
+.drop-option, .drop-option:visited {
+    font-weight: bold;
+    text-decoration: none;
+    
+    color: white;
+    transition: background-color 0.2s;
+    
+    display: block;
+    padding: 1rem 3rem;
+}
+
+.drop-option:hover {
+    background-color: var(--main-color);
+    box-shadow: 0px 0.3rem 2px rgba(0, 0, 0, 0.2);
 }
