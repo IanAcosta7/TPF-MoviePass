@@ -2,7 +2,6 @@
 namespace business\models;
 
 class Movie{
-	
 	private $id;
 	private $poster_path;
 	private $popularity;
