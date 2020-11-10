@@ -13,11 +13,12 @@ class HomeController {
     }
 
     public function Index() {
-        $custom_css = "signin.css";
+        $custom_css = "login.css";
         require_once('./presentation/signin.php');
     }
 
     public function register(){
+        $custom_css = "login.css";
         require_once("./presentation/signup.php");
     }
 
