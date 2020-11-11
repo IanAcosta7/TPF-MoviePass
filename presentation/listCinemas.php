@@ -36,6 +36,7 @@
                 }
             }
             ?>
+            <a class="navbar-btn" href="<?= ROOT_CLIENT?>Cinema/addCinema">agregar Cine</a>
         </div>
     </main>
 
