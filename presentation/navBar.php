@@ -8,7 +8,7 @@
             </ul>
         </div>
         <?php
-            //if(Admin)
+            if($_SESSION["user"]->isAdmin()){
         ?>
         <div class="dropdown">
             <label class="dropdown-label">Administrador</label>
@@ -18,7 +18,7 @@
             </ul>
         </div>
         <?php
-            //}
+            }
         ?>
     </div>
     <div class="navbar-close">

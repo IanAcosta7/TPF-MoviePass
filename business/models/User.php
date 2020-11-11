@@ -13,6 +13,7 @@ class User {
         $this->id = $id;
         $this->email = $email;
         $this->name = $name;
+        $this->isAdmin = $isAdmin;
     }
 
     public function getId(){
@@ -39,7 +40,7 @@ class User {
         $this->name = $name;
     }
 
-    public function isAdmin($isAdmin){
+    public function isAdmin(){
         return $this->isAdmin;
     }
 }

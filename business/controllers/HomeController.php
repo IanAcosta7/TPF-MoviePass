@@ -27,6 +27,7 @@ class HomeController {
 
             if($user){
                 $_SESSION['user'] = $user;
+                $_SESSION['admin'] = $user->isAdmin();
                 header('Location: '. ROOT_CLIENT . 'Movie');
             }else{
                 header('Location: '. ROOT_CLIENT);
