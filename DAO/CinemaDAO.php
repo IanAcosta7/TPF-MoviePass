@@ -50,11 +50,12 @@
         {
             Database::connect();
             $DBCinema = Database::execute("get_cinema_by_id","OUT", array($id))[0];
+            $DBRooms = Database::execute("get_rooms_by_cinema_id", "OUT", array($DBCinema["id_cinema"]));
             return new Cinema(
-                $cinema["id_cinema"],
-                $cinema["capacity"],
-                $cinema["cinema_name"],
-                $cinema["address"],
+                $DBCinema["id_cinema"],
+                $DBCinema["capacity"],
+                $DBCinema["cinema_name"],
+                $DBCinema["address"],
                 array_map(function($room){
                     return new Room($room["id_cinema"], $room["room_name"], $room["room_capacity"], $room["room_price"], $room["id_room"]);
                 },$DBRooms));
