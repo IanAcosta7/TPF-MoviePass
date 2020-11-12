@@ -12,7 +12,6 @@ class CinemaController{
     }
 
     public function Index($id = null) {
-        $custom_css = 'cinema-list.css';
         try{
             if ($id)
                 $this->cinemaDAO->Delete($id);

@@ -1,4 +1,8 @@
+@import url('cinema-list.css');
+@import url('login.css');
+@import url('movie-list.css');
 @import url('navbar.css');
+@import url('shows.css');
 
 :root {
     --main-color: #a81515;
