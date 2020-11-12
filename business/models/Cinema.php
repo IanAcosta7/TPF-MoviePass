@@ -10,7 +10,7 @@ class Cinema {
 	private $rooms;
 	
 
-	function __construct($id, $capacity, $name, $address, $rooms){
+	function __construct($id, $capacity, $name, $address, $rooms=null){
 		$this->id = $id;
 		$this->capacity = $capacity;
 		$this->name = $name;
