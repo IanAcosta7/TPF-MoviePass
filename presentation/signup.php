@@ -1,18 +1,16 @@
 <?php
     require_once("header.php");
 ?>
-    <main>
-        <form action="<?= ROOT_CLIENT?>Home/signup" method="POST">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" placeholder="Ingrese su nombre" required>
+    <main class="login">
+        <form class="login-form" action="<?= ROOT_CLIENT?>Home/signup" method="POST">
+            <input class="login-input" type="text" name="name" placeholder="Nombre" required>
 
-            <label for="email">Email</label>
-            <input type="email" name="email" placeholder="Ingrese su email" required>
+            <input class="login-input" type="email" name="email" placeholder="Correo Electrónico" required>
 
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" placeholder="Ingrese una contraseña" required>
+            <input class="login-input" type="password" name="password" placeholder="Contraseña" required>
 
-            <button type="submit">Enviar</button>
+            <button class="login-btn" type="submit">Enviar</button>
+            <a href="<?= ROOT_CLIENT?>">¿Ya tiene una cuenta? Inicia Sesión</a>
         </form>
     </main>
 <?php

@@ -28,3 +28,17 @@
 .cinema-info {
     margin: 0.5rem;
 }
+
+.cinema-add {
+    margin: 1rem 0rem 0.5rem 0.5rem;
+    margin: 6rem;
+}
+
+.cinema-svg {
+    width: 100%;
+}
+
+.cinema-link, .cinema-link:visited {
+    text-decoration: none;
+    color: white;
+}
