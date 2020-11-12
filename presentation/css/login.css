@@ -1,7 +1,3 @@
-html {
-    font-size: 18px;
-}
-
 .login {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;

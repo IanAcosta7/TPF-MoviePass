@@ -21,8 +21,6 @@ class MovieController {
     }
 
     public function Index($filterGenre = null, $filterDate = null) {
-        $custom_css = 'movie-list.css';
-
         if($filterGenre == 'default')
             $filterGenre = null;
         if ($filterDate == '')
@@ -38,8 +36,6 @@ class MovieController {
     }
 
     public function showAddMovie($filterGenre = null, $filterName = null, $filterDateFrom = null, $filterDateTo = null){
-        $custom_css = "movie-list.css";
-
         if($filterGenre == 'default')
             $filterGenre = null;
         if ($filterName == '')
@@ -84,8 +80,6 @@ class MovieController {
 
     public function shows($id)
     {
-        $custom_css = "shows.css";
-
         if($id != ""){
             try{
                 $showArrays = $this->showDAO->getAll();
