@@ -16,11 +16,14 @@
             <p class="cinema-info"><?php echo $cinema->getAddress()?></p>
             <?php
             foreach($cinema->getRooms() as $room)
-            {?>
+            {
+            ?>
                 <p class="cinema-info"><small> Sala: <?= $room->getName()?> </small></p>
                 <p class="cinema-info"><small> Capacidad: <?= $room->getCapacity()?> </small></p>
                 <p class="cinema-info"><small> Precio: <?= $room->getPrice()?> </small></p>
-            <?php }?>
+            <?php 
+            }
+            ?>
             
 
             <form action="<?php echo ROOT_CLIENT?>cinema" method="POST">

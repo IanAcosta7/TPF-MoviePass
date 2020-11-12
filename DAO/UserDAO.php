@@ -16,7 +16,7 @@ class UserDAO {
     public function getUserById($id){
         Database::connect();
         $DBUser = Database::execute("get_user_by_id", "OUT", array($id))[0];
-        return new User($user["id_user"], $user["email_user"], $user["name_user"]);
+        return new User($DBUser["email_user"], $DBUser["name_user"], $DBUser["is_admin"] == 1, $DBUser["id_user"]);
     }
 
     public function signIn($email, $password){
@@ -24,7 +24,7 @@ class UserDAO {
             $DBUser = Database::execute("signin", "OUT", array($email, hash('sha256', $password)));
             if(!empty($DBUser)){
                 $DBUser = $DBUser[0];
-                return new User($DBUser["id_user"], $DBUser["email_user"], $DBUser["name_user"]);
+                return new User($DBUser["email_user"], $DBUser["name_user"], $DBUser["is_admin"] == 1, $DBUser["id_user"]);
             }
             else
                 return null;
