@@ -7,7 +7,7 @@ class Ticket {
     private $id_purchase;
     private $number;
     private $qr;
-    }
+    
     
     public function __construct($id, $id_purchase, $number, $qr) {
         $this->id = $id;

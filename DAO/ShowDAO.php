@@ -54,6 +54,23 @@ class ShowDAO {
 
         return $DBShows;
     }
+
+    public function getShowByID($idShow)
+    {
+        Database::connect();
+            $Show = Database::execute("get_show_by_id", "OUT", array($idShow))[0];
+            print_r($idShow);
+            echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
+            return new Show(
+                $Show["id_show"],
+                $Show["id_cinema"],
+                $Show["id_movie"],
+                $Show["show_date"],
+                $Show["show_time"],
+                $Show["ticket_value"]
+               );
+               
+    }
 }
 
 ?>

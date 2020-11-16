@@ -23,6 +23,10 @@
                                 <h5 class="cinema-info"><?= $show->getDate()?></h4>
                                 <h5 class="cinema-info"><?= $show->getTime()?></h4>
                                 <h5 class="cinema-info">Valor del ticket: <?= $show->getTicketValue()?></h4>
+                                <form action="<?= ROOT_CLIENT?>buy/buyTicket" method="POST">
+                                    <input type="hidden" name="idShow" value="<?= $show->getIdShow()?>">
+                                    <button class="cinema-delete-btn" type="submit">Comprar</button>
+                                </form>
                             </div>
     <?php
                     }
