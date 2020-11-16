@@ -6,14 +6,16 @@ class Purchase {
     private $id;
     private $tickets;
     private $payment;
+    private $user_id;
     private $discount;
     private $date;
     private $total;
 
-    public function __construct($id, $tickets, $payment, $discount, $date, $total) {
+    public function __construct($id, $tickets, $payment, $user_id, $discount, $date, $total) {
         $this->id = $id;
         $this->tickets = $tickets;
         $this->payment = $payment;
+        $this->user_id = $user_id;
         $this->discount = $discount;
         $this->date = $date;
         $this->total = $total;
@@ -33,6 +35,14 @@ class Purchase {
 
 	public function setId($id){
 		$this->id = $id;
+    }
+    
+    public function getUser_id(){
+		return $this->user_id;
+	}
+
+	public function setUser_id($user_id){
+		$this->user_id = $user_id;
 	}
 
     public function gettickets(){
