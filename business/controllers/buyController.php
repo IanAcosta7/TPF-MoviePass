@@ -19,6 +19,7 @@ class buyController {
     private $ShowDAO;
     private $purchaseDAO;
     private $paymentDAO;
+    private $creditAccountDAO()
 
     public function __construct() {
         $this->movieDAO = new MovieDAO();
@@ -28,6 +29,7 @@ class buyController {
         $this->ShowDAO= new ShowDAO();
         $this->purchaseDAO= new purchaseDAO();
         $this->paymentDAO= new PaymentDAO();
+        $this->creditAccountDAO= new CreditAccountDAO();
     }
 
     public function Index() {
@@ -38,9 +40,9 @@ class buyController {
         if($card != "" && $quantity != "" && $cred_acc !="" && $card && $quantity && $cred_acc)
         {
 
-            $this->purchaseDAO->add(new Purchase(null, $_SESSION["user"]->getId(), 0, date('Y-m-d'), ($this->ShowDAO->getShowByID($idShow)->getTicketValue() * $quantity)));
-            $this->paymentDAO->add(new Payment(null, null, $cred_acc, null, date('Y-m-d'),($this->ShowDAO->getShowByID($idShow)->getTicketValue() * $quantity)));
-
+            $id = $this->purchaseDAO->add(new Purchase(null, $_SESSION["user"]->getId(), 0, date('Y-m-d'), ($this->ShowDAO->getShowByID($idShow)->getRoom()->getPrice() * $quantity)))[0]['id'];
+            $this->paymentDAO->add(new Payment(null, $id, $cred_acc, 65553489, date('Y-m-d'),($this->ShowDAO->getShowByID($idShow)->getRoom()->getPrice() * $quantity)));
+            $credit_accounts = $this->creditAccountDAO->getAll();
 
             header("Location: ". ROOT_CLIENT . "Movie");
         }else{
@@ -57,11 +59,6 @@ class buyController {
 
         
     }
-
-    
-
-    
-
 
 }
 ?>

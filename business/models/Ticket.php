@@ -1,6 +1,6 @@
 <?php
 
-namespace bussiness\models;
+namespace business\models;
 
 class Ticket {
     private $id;

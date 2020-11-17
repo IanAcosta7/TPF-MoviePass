@@ -1,6 +1,8 @@
 <?php
     require 'header.php';
     require 'navbar.php';
+
+    use business\models\Ticket;
 ?>
  
 <img class="movie-backdrop" src="https://image.tmdb.org/t/p/w1280<?= $movie->getBackdrop_path() ?>">
@@ -31,16 +33,16 @@
                                 <h5>
                                 <?php
 
-                                    if ($_SESSION['user']->isAdmin) {
-                                        echo $tickets->amountFromShow($show->getId()) * $show->getRoom()->getPrice();
+                                    if ($_SESSION['user']->isAdmin()) {
+                                        echo Ticket::amountFromShow($tickets, $show->getId()) * $show->getRoom()->getPrice();
                                     }
 
                                 ?>
+                                </h5>
                                 <form action="<?= ROOT_CLIENT?>buy/buyTicket" method="POST">
-                                    <input type="hidden" name="idShow" value="<?= $show->getIdShow()?>">
+                                    <input type="hidden" name="idShow" value="<?= $show->getId()?>">
                                     <button class="cinema-delete-btn" type="submit">Comprar</button>
                                 </form>
-                                </h5>
                             </div>
     <?php
                     }

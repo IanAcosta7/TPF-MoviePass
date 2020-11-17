@@ -24,7 +24,6 @@ class paymentDAO {
         Database::connect();
         $DBPayment = Database::execute('get_payment', 'OUT');
         $DBPayment = array_map(function ($payment){
-            $payment = Database::execute('get_payment_by_id', 'OUT', array($payment['id_payment']))[0];
             return new Payment(
                 $payment["id"],
                 $payment["id_user"],

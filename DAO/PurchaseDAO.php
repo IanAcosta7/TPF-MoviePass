@@ -17,14 +17,13 @@ class purchaseDAO {
 
     public function add($purchase){
         Database::connect();
-        Database::execute('add_purchase', 'IN', array($purchase->getUser_id(),$purchase->getDiscount(),$purchase->getDate(),$purchase->getTotal()));
+        return Database::execute('add_purchase', 'OUT', array($purchase->getUser_id(),$purchase->getDiscount(),$purchase->getDate(),$purchase->getTotal()));
     }
 
     private function getDBPurchase(){
         Database::connect();
         $DBPurchase = Database::execute('get_purchases', 'OUT');
         $DBPurchase = array_map(function ($purchase){
-            $purchase = Database::execute('get_purchase_by_id', 'OUT', array($purchase['id_purchase']))[0];
             return new purchase(
                 $purchase["id"],
                 $purchase["id_user"],

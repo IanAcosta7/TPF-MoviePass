@@ -22,9 +22,8 @@ class ticketDAO {
 
     private function getDBTicket(){
         Database::connect();
-        $DBTicket = Database::execute('get_ticket', 'OUT');
+        $DBTicket = Database::execute('get_tickets', 'OUT');
         $DBTicket = array_map(function ($ticket){
-            $ticket = Database::execute('get_ticket_by_id', 'OUT', array($ticket['id_ticket']))[0];
             return new Ticket(
                 $ticket["id_ticket"],
                 $ticket["id_show"],

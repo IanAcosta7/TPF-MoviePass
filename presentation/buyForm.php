@@ -7,15 +7,16 @@
         <!-- agregar cine y sala -->
         <h5 class="cinema-info"><?= $show->getDate()?></h4>
         <h5 class="cinema-info"><?= $show->getTime()?></h4>
-        <h5 class="cinema-info">Valor del ticket: <?= $show->getTicketValue()?></h4>
+        <h5 class="cinema-info">Valor del ticket: <?= $show->getRoom()->getPrice()?></h4>
 
-        <input type="hidden" name="idShow" value=" <?= $idShow ?>">
-        <input type="radio" id="visa" name="card" value="visa">
-        <label for="card">visa</label><br>
-        <input type="radio" id="mastercard" name="card" value="mastercard">
-        <label for="card">Master Card</label><br>
-        <input type="radio" id="naranja" name="card" value="naranja">
-        <label for="card">Naranja</label><br>
+        <?php
+            foreach ($credit_accounts as $acc) {
+                echo '
+                    <input type="hidden" name="'. $show->getId() .'" value="'. $show->getId() .'">
+                    <input type="radio" id="'. $acc->getId() .'" name="card" value="'. $show->getName() .'">
+                ';
+            }
+        ?>
         <label for="quantity">Cantidad de entradas</label>
         <input type="number" name="quantity" required>
         <label for="cred_acc">Numero de tarjeta</label>

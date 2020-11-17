@@ -1,11 +1,11 @@
 <?php namespace business\controllers;
 
-use models\Ticket;
 use DAO\MovieDAO;
 use DAO\GenreDAO;
 use DAO\Database;
 use DAO\ShowDAO;
 use DAO\CinemaDAO;
+use DAO\TicketDAO;
 
 class MovieController {
 

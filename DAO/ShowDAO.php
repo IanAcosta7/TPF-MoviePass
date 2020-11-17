@@ -17,9 +17,9 @@ class ShowDAO {
         return $this->shows;
     }
 
-    public function add($room, $idMovie, $date, $time){
+    public function add($idRoom, $idMovie, $date, $time){
         Database::connect();
-        Database::execute('add_show', 'IN', array($room->getId(), $idMovie, $date, $time));
+        Database::execute('add_show', 'IN', array($idRoom, $idMovie, $date, $time));
     }
 
     private function getDBShows(){
@@ -31,11 +31,11 @@ class ShowDAO {
             $genres = Database::execute('get_genres_of_movie', 'OUT', array($movie['id_movie']));
             return new Show($show['id_show'], 
                 new Room(
-                    $room['id_room'],
                     $room['id_cinema'],
                     $room['room_name'],
                     $room['room_capacity'],
-                    $room['room_price']
+                    $room['room_price'],
+                    $room['id_room']
                 ),
                 new Movie(
                     $movie["id_movie"],
@@ -55,8 +55,7 @@ class ShowDAO {
                     $movie["release_date"]
                 ),
                 $show['show_date'],
-                $show['show_time'],
-                $show['ticket_value'],
+                $show['show_time']
             );
         }, $DBShows);
 
@@ -67,13 +66,19 @@ class ShowDAO {
     {
         Database::connect();
             $Show = Database::execute("get_show_by_id", "OUT", array($idShow))[0];
+            $room = Database::execute("get_room_by_id", "OUT", array($Show['id_room']))[0];
             return new Show(
                 $Show["id_show"],
-                $Show["id_cinema"],
+                new Room(
+                    $room['id_cinema'],
+                    $room['room_name'],
+                    $room['room_capacity'],
+                    $room['room_price'],
+                    $room['id_room']
+                ),
                 $Show["id_movie"],
                 $Show["show_date"],
-                $Show["show_time"],
-                $Show["ticket_value"]
+                $Show["show_time"]
                );
                
     }

@@ -24,7 +24,7 @@
             
             $DBRoom = Database::execute("get_rooms", "OUT");
             $DBRoom = array_map(function($room){
-                return new Room($room["id_cinema"], $room["id_room"],$room["name"],$room["capacity"],$room["price"]);
+                return new Room($room["id_cinema"], $room["name"],$room["capacity"],$room["price"], $room["id_room"]);
             },$DBRoom);
             
             return $DBRoom;
