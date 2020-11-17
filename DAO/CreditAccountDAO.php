@@ -18,11 +18,10 @@
     
         private function getDBcreditAccount(){
             Database::connect();
-            $DBcreditAccount = Database::execute('', 'OUT');
+            $DBcreditAccount = Database::execute('get_credit_accounts', 'OUT');
             $DBcreditAccount = array_map(function ($creditAccount){
-                $payment = Database::execute('', 'OUT', array($creditAccount['id']))[0];
                 return new CreditAccount(
-                    $creditAccount["id"],
+                    $creditAccount["id_credit_account"],
                     $creditAccount["company"]
                 );
             }, $DBcreditAccount);
