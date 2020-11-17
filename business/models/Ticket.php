@@ -9,6 +9,7 @@ class Ticket {
     private $number;
     private $qr;
     
+    
     public function __construct($id, $id_purchase, $id_show, $number, $qr) {
         $this->id = $id;
         $this->id_purchase = $id_purchase;

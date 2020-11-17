@@ -36,6 +36,10 @@
                                     }
 
                                 ?>
+                                <form action="<?= ROOT_CLIENT?>buy/buyTicket" method="POST">
+                                    <input type="hidden" name="idShow" value="<?= $show->getIdShow()?>">
+                                    <button class="cinema-delete-btn" type="submit">Comprar</button>
+                                </form>
                                 </h5>
                             </div>
     <?php
