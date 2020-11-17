@@ -12,15 +12,13 @@
         <?php
             foreach ($credit_accounts as $acc) {
                 echo '
-                    <input type="hidden" name="'. $show->getId() .'" value="'. $show->getId() .'">
-                    <input type="radio" id="'. $acc->getId() .'" name="card" value="'. $show->getName() .'">
+                    <input type="hidden" name="show_id" value="'. $show->getId() .'">
+                    <input type="radio" name="card" value="'. $acc->getId() .'">'. $acc->getCompany() .'</input>
                 ';
             }
         ?>
         <label for="quantity">Cantidad de entradas</label>
         <input type="number" name="quantity" required>
-        <label for="cred_acc">Numero de tarjeta</label>
-        <input type="number" name="cred_acc" required>
 
 
         <button type="submit">Enviar</button>
