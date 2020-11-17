@@ -59,8 +59,6 @@ class ShowDAO {
     {
         Database::connect();
             $Show = Database::execute("get_show_by_id", "OUT", array($idShow))[0];
-            print_r($idShow);
-            echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
             return new Show(
                 $Show["id_show"],
                 $Show["id_cinema"],

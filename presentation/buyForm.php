@@ -15,9 +15,12 @@
         <input type="radio" id="mastercard" name="card" value="mastercard">
         <label for="card">Master Card</label><br>
         <input type="radio" id="naranja" name="card" value="naranja">
-        <label for="card">visa</label><br>
+        <label for="card">Naranja</label><br>
         <label for="quantity">Cantidad de entradas</label>
         <input type="number" name="quantity" required>
+        <label for="cred_acc">Numero de tarjeta</label>
+        <input type="number" name="cred_acc" required>
+
 
         <button type="submit">Enviar</button>
         <button type="reset">Borrar</button>
