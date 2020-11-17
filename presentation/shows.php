@@ -15,18 +15,32 @@
             {
                 if ($show->getDate() >= date('Y-m-d')) {
                     if($id == $show->getMovie()->getId()){
-                        $cinemas = $this->CinemaDAO->getCinemaById($show->getIdCinema());
     ?>                    
                             <div class="cinema-card">
-                                <h4 class="cinema-info"><?= $cinemas->getName()?></p>     
-                                <p class="cinema-info"><?= $cinemas->getAddress()?></p>     
-                                <h5 class="cinema-info"><?= $show->getDate()?></h4>
-                                <h5 class="cinema-info"><?= $show->getTime()?></h4>
-                                <h5 class="cinema-info">Valor del ticket: <?= $show->getTicketValue()?></h4>
+                                <h4 class="cinema-info"><?= $show->getRoom()->getName()?></p>     
+                                <h5 class="cinema-info"><?= $show->getDate()?></h5>
+                                <h5 class="cinema-info"><?= $show->getTime()?></h5>
+                                <h5 class="cinema-info">Valor del ticket: <?= $show->getRoom()->getPrice()?></h5>
+                                <h5>
+                                <?php 
+                                    if ($_SESSION['user']->isAdmin()) {
+                                        echo Ticket::amountFromShow($tickets, $show->getId()) .'/'. $show->getRoom()->getCapacity();
+                                    }
+                                ?>
+                                </h5>
+                                <h5>
+                                <?php
+
+                                    if ($_SESSION['user']->isAdmin) {
+                                        echo $tickets->amountFromShow($show->getId()) * $show->getRoom()->getPrice();
+                                    }
+
+                                ?>
                                 <form action="<?= ROOT_CLIENT?>buy/buyTicket" method="POST">
                                     <input type="hidden" name="idShow" value="<?= $show->getIdShow()?>">
                                     <button class="cinema-delete-btn" type="submit">Comprar</button>
                                 </form>
+                                </h5>
                             </div>
     <?php
                     }

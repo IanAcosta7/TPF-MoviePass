@@ -19,6 +19,8 @@ class Database {
         $parameters = "";
         if($array != '') {
             $array = array_map(function ($value) {
+                if (gettype($value) === "string")
+                    $value = str_replace('"', '&quot;', $value);
                 return '"'. $value .'"';
             }, $array);
             

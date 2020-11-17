@@ -1,5 +1,6 @@
 <?php namespace business\controllers;
 
+use models\Ticket;
 use DAO\MovieDAO;
 use DAO\GenreDAO;
 use DAO\Database;
@@ -12,12 +13,14 @@ class MovieController {
     private $genres;
     private $showDAO;
     private $CinemaDAO;
+    private $ticketDAO;
 
     public function __construct() {
         $this->movieDAO = new MovieDAO();
         $this->genresDAO = new genreDAO();
         $this->showDAO= new ShowDAO();
         $this->CinemaDAO= new CinemaDAO();
+        $this->ticketDAO= new TicketDAO();
     }
 
     public function Index($filterGenre = null, $filterDate = null) {
@@ -46,8 +49,6 @@ class MovieController {
             $filterDateTo = null;
 
             try{
-                $data = $this->showDAO->GetAll();
-                $genres = $this->genresDAO->GetAll();
                 $data = $this->movieDAO->GetAll();
                 $genres = $this->genresDAO->GetAll();       
                 require_once("./presentation/addShow.php");
@@ -65,17 +66,16 @@ class MovieController {
         }
     }
     
-    public function addShow($idCinema, $date, $time, $ticketValue, $idMovie){
-        if($idCinema != "" && $date != "" && $time != "" && $ticketValue != "" && $idMovie != "")
+    public function addShow($idRoom, $date, $time, $idMovie){
+        if($idRoom != "" && $date != "" && $time != "" && $idMovie != "")
         {
             try{
-                $this->showDAO->add($idCinema, $idMovie, $date, $time, $ticketValue);
+                $this->showDAO->add($idRoom, $idMovie, $date, $time);
                 header('Location: '. ROOT_CLIENT .'Movie');
             }catch(DatabaseException $e){
                 require_once("./presentation/error.php");
             }
         }
-
     }
 
     public function shows($id)
@@ -84,6 +84,7 @@ class MovieController {
             try{
                 $showArrays = $this->showDAO->getAll();
                 $movie= $this->movieDAO->getMovieById($id);
+                $tickets = $this->ticketDAO->getAll();
                 require_once("./presentation/shows.php");
             }catch(DatabaseException $e){
                 require_once("./presentation/error.php");

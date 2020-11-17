@@ -57,4 +57,15 @@ class Ticket {
 	public function setQr($qr){
 		$this->qr = $qr;
 	}
+
+	public function amountFromShow($tickets, $id) {
+		$c = 0;
+		
+		foreach ($tickets as $ticket) {
+			if ($ticket->getId_show() == $id)
+				$c++;
+		}
+
+		return $c;
+	}
 }
