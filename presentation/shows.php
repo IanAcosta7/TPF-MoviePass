@@ -16,7 +16,7 @@
             foreach($showArrays as $show)
             {
                 if ($show->getDate() >= date('Y-m-d')) {
-                    if($id == $show->getMovie()->getId()){
+                    if($id == $movie->getId()){
     ?>                    
                             <div class="cinema-card">
                                 <h4 class="cinema-info"><?= $show->getRoom()->getName()?></p>     

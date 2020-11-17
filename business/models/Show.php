@@ -4,14 +4,14 @@ namespace business\models;
 class Show{
 	private $id;
     private $room;
-	private $idMovie;
+	private $movie;
     private $date;
 	private $time;
 	
-    public function __construct($id, $room, $idMovie, $date, $time){
+    public function __construct($id, $room, $movie, $date, $time){
 		$this->id = $id;
         $this->room = $room;
-        $this->idMovie = $idMovie;
+        $this->movie = $movie;
         $this->date = $date;
 		$this->time = $time;
 	}
@@ -32,12 +32,12 @@ class Show{
 		return $this->room;
 	}
 	
-	public function setIdMovie($idMovie){
-		$this->idMovie = $idMovie;
+	public function setMovie($movie){
+		$this->movie = $movie;
 	}
 	
-	public function getIdMovie(){
-		return $this->idMovie;
+	public function getMovie(){
+		return $this->movie;
 	}
 
     public function getdate(){
