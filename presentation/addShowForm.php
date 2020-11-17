@@ -6,12 +6,15 @@
      
     <form action="<?php echo ROOT_CLIENT?>Movie/addShow" method="POST">
 
-         <label for="cinema">Cines</label>
-         <select name="cinemas" id="cinemas">
+        <label for="cinema">Cines</label>
+        <select name="cinemas" id="cinemas">
             <?php 
                 foreach($cinemaList as $cinema)
                 {
-                    echo '<option value="'. $cinema->getId() .'">'. $cinema->getName() .'</option>';
+                    foreach ($cinema->getRooms() as $room)
+                    {
+                        echo '<option value="'. $room->getId() .'">'. $cinema->getName() . ': ' . $room->getName() .'</option>';
+                    }
                 }
             ?>
         </select> 
@@ -21,9 +24,6 @@
 
         <label for="time">Horario</label>
         <input type="time" name="time" required> 
-
-        <label for="ticketValue">Valor de la entrada</label>
-        <input type="text" name="ticketValue" required> 
 
         <input type="hidden" name="idMovie" value= "<?php echo $idMovie ?>" required> 
 

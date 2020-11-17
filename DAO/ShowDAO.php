@@ -3,6 +3,7 @@
 use business\models\Show;
 use business\models\Movie;
 use business\models\Genre;
+use business\models\Room;
 use DAO\Database;
 
 require_once("./config/ENV.php");
@@ -16,9 +17,9 @@ class ShowDAO {
         return $this->shows;
     }
 
-    public function add($idCinema, $idMovie, $date, $time, $ticketValue){
+    public function add($room, $idMovie, $date, $time){
         Database::connect();
-        Database::execute('add_show', 'IN', array($idCinema, $idMovie, $date, $time, $ticketValue));
+        Database::execute('add_show', 'IN', array($room->getId(), $idMovie, $date, $time));
     }
 
     private function getDBShows(){
@@ -26,9 +27,16 @@ class ShowDAO {
         $DBShows = Database::execute('get_shows', 'OUT');
         $DBShows = array_map(function ($show){
             $movie = Database::execute('get_movie_by_id', 'OUT', array($show['id_movie']))[0];
+            $room = Database::execute('get_room_by_id', 'OUT', array($show['id_room']))[0];
             $genres = Database::execute('get_genres_of_movie', 'OUT', array($movie['id_movie']));
             return new Show($show['id_show'], 
-                $show['id_cinema'], 
+                new Room(
+                    $room['id_room'],
+                    $room['id_cinema'],
+                    $room['room_name'],
+                    $room['room_capacity'],
+                    $room['room_price']
+                ),
                 new Movie(
                     $movie["id_movie"],
                     $movie["poster_path"],
@@ -48,7 +56,7 @@ class ShowDAO {
                 ),
                 $show['show_date'],
                 $show['show_time'],
-                $show['ticket_value']
+                $show['ticket_value'],
             );
         }, $DBShows);
 

@@ -3,19 +3,17 @@ namespace business\models;
 
 class Show{
 	private $idShow;
-    private $cinema;
+    private $room;
 	private $movie;
     private $date;
 	private $time;
-	private $ticketValue;
 	
-    public function __construct($idShow, $cinema, $movie, $date, $time, $ticketValue){
+    public function __construct($idShow, $room, $movie, $date, $time){
 		$this->idShow = $idShow;
-        $this->cinema = $cinema;
+        $this->room = $room;
         $this->movie = $movie;
         $this->date = $date;
 		$this->time = $time;
-		$this->ticketValue = $ticketValue;
 	}
 	
 	public function getIdShow() {
@@ -26,12 +24,12 @@ class Show{
 		$this->idShow = $idShow;
 	}
 
-	public function setIdCinema($cinema){
-		$this->cinema = $cinema;
+	public function setRoom($room){
+		$this->room = $room;
 	}
 	
-	public function getIdCinema(){
-		return $this->cinema;
+	public function getRoom(){
+		return $this->room;
 	}
 	
 	public function setMovie($movie){
@@ -56,14 +54,6 @@ class Show{
 
 	public function setTime($time){
 		$this->time = $time;
-	}
-
-	public function getTicketValue() {
-		return $this->ticketValue;
-	}
-
-	public function setTicketValue($ticketValue) {
-		$this->ticketValue = $ticketValue;
 	}
 
 }
