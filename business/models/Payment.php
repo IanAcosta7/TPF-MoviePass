@@ -4,15 +4,15 @@ namespace business\models;
 
 class Payment {
     private $id;
-    private $id_purchase;
+    private $id_user;
     private $cred_acc;
     private $auth_code;
     private $date;
     private $total;
 
-    public function __construct($id, $id_purchase, $cred_acc, $auth_code, $date, $total){
+    public function __construct($id, $id_user, $cred_acc, $auth_code, $date, $total){
         $this->id = $id;
-        $this->id_purchase = $id_purchase;
+        $this->id_user = $id_user;
         $this->cred_acc = $cred_acc;
         $this->auth_code = $auth_code;
         $this->date = $date;
@@ -27,12 +27,12 @@ class Payment {
 		$this->id = $id;
 	}
 
-	public function getId_purchase(){
-		return $this->id_purchase;
+	public function getId_user(){
+		return $this->id_user;
 	}
 
-	public function setId_purchase($id_purchase){
-		$this->id_purchase = $id_purchase;
+	public function setId_user($id_user){
+		$this->id_user = $id_user;
 	}
 
 	public function getCred_acc(){

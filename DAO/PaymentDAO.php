@@ -17,18 +17,23 @@ class paymentDAO {
 
     public function add($payment){
         Database::connect();
-        Database::execute('add_payment', 'IN', array($payment->getId_purchase(), $payment->getCred_acc(), $payment->getAuth_code(), $payment->getTotal(),$payment->getDate()));
+        Database::execute('add_payment', 'IN', array($payment->getId(), $payment->getCred_acc()->getCompany(), $payment->getAuth_code(), $payment->getTotal(),$payment->getDate()));
     }
 
     private function getDBPayment(){
         Database::connect();
         $DBPayment = Database::execute('get_payment', 'OUT');
         $DBPayment = array_map(function ($payment){
+            $cred_acc = Database::execute('get_credit_account_by_id', 'OUT', array($payment["id_credit_account"]));
             return new Payment(
                 $payment["id"],
                 $payment["id_user"],
-                $payment["discount"],
-                $payment["date"],
+                new CreditAccount(
+                    $cred_acc["id_credit_account"],
+                    $cred_acc["company"]
+                ), 
+                $payment["auth_code"], 
+                $payment["date"], 
                 $payment["total"]
             );
         }, $DBPayment);
