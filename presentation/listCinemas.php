@@ -14,26 +14,41 @@
         <div class="cinema-card">
             <h3 class="cinema-info"><?php echo$cinema->getName()?></h3>
             <p class="cinema-info"><?php echo $cinema->getAddress()?></p>
-            <?php
-            foreach($cinema->getRooms() as $room)
-            {
-            ?>
-                <p class="cinema-info"><small> Sala: <?= $room->getName()?> </small></p>
-                <p class="cinema-info"><small> Capacidad: <?= $room->getCapacity()?> </small></p>
-                <p class="cinema-info"><small> Precio: <?= $room->getPrice()?> </small></p>
-            <?php 
-            }
-            ?>
+            <table class="cinema-rooms">
+                <tr>
+                    <th>Sala</th>
+                    <th>Capacidad</th>
+                    <th>Precio</th>
+                    <th>Borrar</th>
+                </tr>
+                <?php
+                    foreach($cinema->getRooms() as $room) {
+                ?>
+                <tr>
+                    <td class="cinema-info"><small><?= $room->getName()?> </small></td>
+                    <td class="cinema-info"><small><?= $room->getCapacity()?> </small></td>
+                    <td class="cinema-info"><small>$<?= $room->getPrice()?> </small></td>
+                    <td>
+                        <form action="<?php echo ROOT_CLIENT?>Room/deleteRoom" method="POST">
+                            <input type="hidden" name="id" value="<?= $room->getId() ?>">
+                            <button type="submit"><img src="<?= ROOT_CLIENT ?>presentation/svg/delete-white-18dp.svg"></button>
+                        </form>       
+                    </td>
+                </tr>
+                <?php 
+                    }
+                ?>
+            </table>
             
+            <form action="<?= ROOT_CLIENT?>Room/addRoom" method="POST">
+                <input type="hidden" name="idCinema" value="<?= $cinema->getId() ?>">
+                <button type="submit"><small>Agregar sala</small></button>
+            </form> 
 
             <form action="<?php echo ROOT_CLIENT?>cinema" method="POST">
                 <input type="hidden" name="id" value="<?= $cinema->getId() ?>">
-                <button class="cinema-delete-btn" type="submit">Eliminar</button>
-            </form>
-            <form action="<?= ROOT_CLIENT?>Room/addRoom" method="POST">
-                <input type="hidden" name="idCinema" value="<?= $cinema->getId() ?>">
-                <button class="cinema-delete-btn" type="submit">Agregar sala</button>
-            </form>          
+                <button class="cinema-delete-btn" type="submit"><small>Eliminar</small></button>
+            </form>         
         </div>
 
         <?php

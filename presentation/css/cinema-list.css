@@ -5,6 +5,7 @@
 
 .cinema-card {
     text-align: center;
+    position: relative;
 
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0.2rem;
@@ -15,6 +16,9 @@
 
 .cinema-delete-btn {
     background-color: rgb(212, 43, 43);
+    position: absolute;
+    bottom: 0.3rem;
+    right: 0.3rem;
 }
 
 .cinema-delete-btn:hover {
@@ -23,6 +27,10 @@
 
 .cinema-delete-btn:focus {
     background-color: rgb(136, 22, 22);
+}
+
+.cinema-rooms {
+    width: 100%;
 }
 
 .cinema-info {

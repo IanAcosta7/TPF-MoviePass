@@ -25,4 +25,13 @@ class RoomController{
         }
     }
 
+    public function deleteRoom($id) {
+        try {
+            $this->roomDAO->delete($id);
+        } catch (Exception $e) {
+
+        }
+        header("Location: ". ROOT_CLIENT ."Cinema");
+    }
+
 }
