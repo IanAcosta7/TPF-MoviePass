@@ -42,7 +42,7 @@ class BuyController {
         
     }
 
-    public function buyTicket($idShow, $card=null, $quantity=null){
+    public function buyTicket($idShow, $card=null, $cardNumber=null, $secCode=null, $quantity=null){
         if($card != "" && $quantity != "" && $card && $quantity)
         {
             $show = $this->showDAO->getShowById($idShow);

@@ -91,7 +91,7 @@ class MovieController {
                 foreach ($showArrays as $show) {
                     $idCinema = $show->getRoom()->getIdCinema();
 
-                    if (!array_key_exists($idCinema, $cinemas) && $show->getMovie()->getId() == $movie->getId())
+                    if (!array_key_exists($idCinema, $cinemas) && $show->getMovie()->getId() == $movie->getId() && $show->getDate() >= date('Y-m-d'))
                         $cinemas[$idCinema] = $this->cinemaDAO->getCinemaById($idCinema);
                 }
 
