@@ -3,7 +3,9 @@
 require_once("header.php");
 require_once("navbar.php");
 ?>
-<main>
-    <h2> <?php echo $e->getErrorNumber(); ?> </h2>
-    <p> <?php echo $e->getErrorMessage(); ?> </p>
+<main class="error">
+    <div class="error-msg">
+        <h2 class="error-number"> <?php echo $e->getErrorNumber(); ?> </h2>
+        <p class="error-desc"> <?php echo $e->getMessage(); ?> </p>
+    </div>
 </main>

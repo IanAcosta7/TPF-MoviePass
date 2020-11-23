@@ -18,7 +18,7 @@ class CinemaController{
 
             $cinemas = $this->cinemaDAO->GetAll();
             require_once("./presentation/listCinemas.php");
-        }catch(DatabaseException $e){
+        }catch(WebsiteException $e){
             require_once("./presentation/error.php");
         }   
     }
@@ -30,7 +30,7 @@ class CinemaController{
             try{
                 $this->cinemaDAO->Add($cinema);
                 header("Location: ". ROOT_CLIENT . "Cinema");
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
         } else {

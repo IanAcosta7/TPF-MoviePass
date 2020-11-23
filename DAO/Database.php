@@ -1,7 +1,7 @@
 <?php namespace DAO;
 
 use \PDO;
-use business\exceptions\DatabaseException;
+use business\exceptions\WebsiteException;
 
 class Database {
     private static $pdo = null;
@@ -10,7 +10,7 @@ class Database {
         if(!Database::$pdo){
             Database::$pdo = new PDO("mysql:host=". DB_SERVERNAME ."; dbname=". DB_NAME, DB_USERNAME, DB_PASSWORD);
             if(!Database::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))
-                throw new DatabaseException("Error en la conexion a la base de datos", "CONNECTION_ERROR");
+                throw new WebsiteException("Error en la conexion a la base de datos", "CONNECTION_ERROR");
         }
     }
 
@@ -31,7 +31,7 @@ class Database {
     
         $statement = Database::$pdo->prepare($query);
         if(!$statement->execute())
-            throw new DatabaseException("Error en la ejecucion de la base de datos", "EXECUTION_ERROR");
+            throw new WebsiteException("Error en la ejecucion de la base de datos", "EXECUTION_ERROR");
         
         if ($type === 'OUT') {
             $result = $statement->fetchAll();

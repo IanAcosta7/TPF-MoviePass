@@ -17,7 +17,7 @@ class RoomController{
             try{
                 $this->roomDAO->Add($room);
                 header("Location: ". ROOT_CLIENT . "Cinema");
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
         } else {

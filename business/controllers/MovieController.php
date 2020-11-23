@@ -32,7 +32,7 @@ class MovieController {
                 $data = $this->showDAO->GetAll();
                 $genres = $this->genresDAO->GetAll();
                 require('./presentation/listMovies.php');
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
         
@@ -52,7 +52,7 @@ class MovieController {
                 $data = $this->movieDAO->GetAll();
                 $genres = $this->genresDAO->GetAll();       
                 require_once("./presentation/addShow.php");
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
     }
@@ -61,7 +61,7 @@ class MovieController {
         try{
             $cinemaList = $this->CinemaDAO->GetAll();
             require_once("./presentation/addShowForm.php");
-        }catch(DatabaseException $e){
+        }catch(WebsiteException $e){
             require_once("./presentation/error.php");
         }
     }
@@ -72,7 +72,7 @@ class MovieController {
             try{
                 $this->showDAO->add($idRoom, $idMovie, $date, $time);
                 header('Location: '. ROOT_CLIENT .'Movie');
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
         }
@@ -86,7 +86,7 @@ class MovieController {
                 $movie= $this->movieDAO->getMovieById($id);
                 $tickets = $this->ticketDAO->getAll();
                 require_once("./presentation/shows.php");
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
         }

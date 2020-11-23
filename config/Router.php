@@ -2,6 +2,7 @@
     namespace config;
 
     use config\Request as Request;
+    use business\exceptions\WebsiteException;
 
     class Router
     {
@@ -15,19 +16,26 @@
 
             $controllerClassName = "business\\controllers\\". $controllerName;            
 
-            $controller = new $controllerClassName;
-            
-            Router::checkSignIn($controller, $methodName, $methodParameters, $controllerName);
+            Router::checkSignIn($methodName, $methodParameters, $controllerName, $controllerClassName);
         }
 
-        private static function checkSignIn($controller, $methodName, $methodParameters, $controllerName){
+        private static function checkSignIn($methodName, $methodParameters, $controllerName, $controllerClassName){
             if($controllerName != 'HomeController' && !isset($_SESSION['user']))
                 header('Location: ' . ROOT_CLIENT);
           
-            if(!isset($methodParameters))    
-                call_user_func(array($controller, $methodName));
-            else
-                call_user_func_array(array($controller, $methodName), $methodParameters);  
+            try {
+                if (!file_exists($controllerClassName . '.php'))
+                    throw new WebsiteException("Página no encontrada.", "PAGE_NOT_FOUND", 404);
+
+                $controller = new $controllerClassName;
+
+                if(!isset($methodParameters))    
+                    call_user_func(array($controller, $methodName));
+                else
+                    call_user_func_array(array($controller, $methodName), $methodParameters);  
+            } catch (\Throwable $e) {
+                include(ROOT . 'presentation/error.php');
+            }
         }
     }
 ?>

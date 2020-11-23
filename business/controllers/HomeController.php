@@ -32,7 +32,7 @@ class HomeController {
                 header('Location: '. ROOT_CLIENT);
             }
 
-        } catch (DatabaseException $e) {
+        } catch (WebsiteException $e) {
             require_once("./presentation/error.php");
         }
     }
@@ -42,7 +42,7 @@ class HomeController {
             try{
                 $this->userDAO->add($email, $name, $password);
                 header('Location: '. ROOT_CLIENT);
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
         }

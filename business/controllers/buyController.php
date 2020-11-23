@@ -64,7 +64,7 @@ class buyController {
                 
                 require_once("./presentation/buyForm.php");
         
-            }catch(DatabaseException $e){
+            }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }
             

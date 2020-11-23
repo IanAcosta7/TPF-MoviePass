@@ -3,6 +3,7 @@
 @import url('movie-list.css');
 @import url('navbar.css');
 @import url('shows.css');
+@import url('error.css');
 
 :root {
     --main-color: #a81515;
