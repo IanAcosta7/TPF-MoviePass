@@ -14,7 +14,7 @@
     use business\models\Payment;
     use business\models\Ticket;
 
-class buyController {
+class BuyController {
 
     private $movieDAO;
     private $genres;
@@ -47,16 +47,21 @@ class buyController {
         {
             $show = $this->showDAO->getShowById($idShow);
             $tickets = $this->ticketDAO->getAll();
-            if ($quantity < $show->getRoom()->getCapacity() - Ticket::amountFromShow($tickets, $show->getId())) {
+            if ($quantity <= $show->getRoom()->getCapacity() - Ticket::amountFromShow($tickets, $show->getId())) {
                 $id = $this->purchaseDAO->add(new Purchase(null, $_SESSION["user"]->getId(), 0, date('Y-m-d'), ($this->ShowDAO->getShowByID($idShow)->getRoom()->getPrice() * $quantity)))[0]['id'];
                 $this->paymentDAO->add(new Payment(null, $id, new CreditAccount(null, $card), 65553489, date('Y-m-d'),($this->ShowDAO->getShowByID($idShow)->getRoom()->getPrice() * $quantity)));
                 
                 for ($i = 0; $i < $quantity; $i++) {
                     $this->ticketDAO->add(new Ticket(null, $id, $idShow, $i));
                 }
-            }
 
-            header("Location: ". ROOT_CLIENT . "Movie");
+                $alertMessage = 'Compra realizada con éxito.';
+            } else {
+                $alertMessage = 'La cantidad de entradas ingresada, no está disponible.';
+            }
+            
+            $redirectUrl = 'Movie';
+            include(ROOT."presentation/alert.php");
         }else{
             try{
                 $show = $this->ShowDAO->getShowByID($idShow);

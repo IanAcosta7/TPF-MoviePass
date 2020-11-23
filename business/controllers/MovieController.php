@@ -4,7 +4,7 @@ use DAO\MovieDAO;
 use DAO\GenreDAO;
 use DAO\Database;
 use DAO\ShowDAO;
-use DAO\CinemaDAO;
+use DAO\cinemaDAO;
 use DAO\TicketDAO;
 
 class MovieController {
@@ -12,14 +12,14 @@ class MovieController {
     private $movieDAO;
     private $genres;
     private $showDAO;
-    private $CinemaDAO;
+    private $cinemaDAO;
     private $ticketDAO;
 
     public function __construct() {
         $this->movieDAO = new MovieDAO();
         $this->genresDAO = new genreDAO();
         $this->showDAO= new ShowDAO();
-        $this->CinemaDAO= new CinemaDAO();
+        $this->cinemaDAO= new cinemaDAO();
         $this->ticketDAO= new TicketDAO();
     }
 
@@ -59,7 +59,7 @@ class MovieController {
 
     public function addShowForm($idMovie){
         try{
-            $cinemaList = $this->CinemaDAO->GetAll();
+            $cinemaList = $this->cinemaDAO->GetAll();
             require_once("./presentation/addShowForm.php");
         }catch(WebsiteException $e){
             require_once("./presentation/error.php");
@@ -85,6 +85,16 @@ class MovieController {
                 $showArrays = $this->showDAO->getAll();
                 $movie= $this->movieDAO->getMovieById($id);
                 $tickets = $this->ticketDAO->getAll();
+
+                $cinemas = array();
+
+                foreach ($showArrays as $show) {
+                    $idCinema = $show->getRoom()->getIdCinema();
+
+                    if (!array_key_exists($idCinema, $cinemas) && $show->getMovie()->getId() == $movie->getId())
+                        $cinemas[$idCinema] = $this->cinemaDAO->getCinemaById($idCinema);
+                }
+
                 require_once("./presentation/shows.php");
             }catch(WebsiteException $e){
                 require_once("./presentation/error.php");

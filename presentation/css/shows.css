@@ -16,10 +16,42 @@
     padding: 2rem;
 }
 
-.cinema-card {
-    border-radius: 0.2rem;
-    background-color: white;
+.show-list {
+    display: grid;
 
-    padding: 1rem;
-    margin-bottom: 0.3rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+@media (max-device-width: 1700px) {
+    .show-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (max-device-width: 1300px) {
+    .show-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.show-info {
+    margin: 0.5rem;
+}
+
+.show-price {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.show-card {
+    position: relative;
+
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+
+    margin: 0.5rem;
+    padding: 0.5rem 0;
 }

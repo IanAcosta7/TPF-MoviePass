@@ -1,0 +1,16 @@
+.alert-card {
+    position: relative;
+    margin: 3rem auto;
+    width: 20%;
+
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+
+    padding: 2rem 3rem;
+}
+
+.alert-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+}

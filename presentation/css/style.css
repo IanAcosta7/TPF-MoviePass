@@ -4,6 +4,7 @@
 @import url('navbar.css');
 @import url('shows.css');
 @import url('error.css');
+@import url('alert.css');
 
 :root {
     --main-color: #a81515;

@@ -57,7 +57,7 @@
         ?>
 
         <button class="cinema-add">
-            <a class="cinema-link" href="<?= ROOT_CLIENT ?>Cinema/addCinema">
+            <a class="btn-link" href="<?= ROOT_CLIENT ?>Cinema/addCinema">
                 <img class="cinema-svg" src="<?= ROOT_CLIENT ?>presentation/svg/add-white-18dp.svg">
                 <p>Nuevo Cine</p>
             </a>

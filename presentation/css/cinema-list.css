@@ -46,7 +46,7 @@
     width: 100%;
 }
 
-.cinema-link, .cinema-link:visited {
+.btn-link, .btn-link:visited {
     text-decoration: none;
     color: white;
 }
