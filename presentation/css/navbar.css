@@ -11,13 +11,18 @@
     z-index: 1;
 
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 1fr 15fr 1fr;
 }
 
 .navbar-close {
     display: flex;
     justify-content: flex-end;
     margin: auto 1rem;
+}
+
+.navbar-logo {
+    margin: auto 1rem;
+    height: calc(var(--navbar-size) - 1rem);
 }
 
 .navbar-btn:visited, .navbar-btn:link {
@@ -38,6 +43,18 @@
 
     height: 100%;
     padding: 0rem 3rem;
+}
+
+@media (max-device-width: 600px) {
+    .dropdown {
+        padding: 0rem 1.5rem;
+    }
+}
+
+@media (max-device-width: 450px) {
+    .dropdown {
+        padding: 0rem 0.5rem;
+    }
 }
 
 .dropdown:hover > .dropdown-options {
@@ -61,6 +78,7 @@
     background-color: var(--main-color-darker-2);
     position: absolute;
     
+    width: 100%;
     top: -100%;
     z-index: -1;
     left: 0;

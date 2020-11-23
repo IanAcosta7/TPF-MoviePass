@@ -5,6 +5,7 @@
 @import url('shows.css');
 @import url('error.css');
 @import url('alert.css');
+@import url('form.css');
 
 :root {
     --main-color: #a81515;

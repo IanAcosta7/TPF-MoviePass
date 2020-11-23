@@ -3,6 +3,24 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+@media (max-device-width: 1700px) {
+    .cinema-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (max-device-width: 1200px) {
+    .cinema-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-device-width: 600px) {
+    .cinema-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 .cinema-card {
     text-align: center;
     position: relative;

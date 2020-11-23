@@ -1,4 +1,5 @@
 <nav class="navbar">  
+    <img class="navbar-logo" src="<?=ROOT_CLIENT?>presentation/png/movie-pass.png">
     <div class="navbar-menu">
         <div class="dropdown">
             <label class="dropdown-label">Opciones</label>

@@ -4,10 +4,14 @@
 ?>
 
      
-    <form action="<?php echo ROOT_CLIENT?>Movie/addShow" method="POST">
+    <form class="card-form" action="<?php echo ROOT_CLIENT?>Movie/addShow" method="POST">
 
-        <label for="cinema">Cines</label>
-        <select name="cinemas" id="cinemas">
+        <h3>Nueva Función</h3>
+
+        <div class="card-left">
+            <h4 for="cinema">Cine</h4>
+        </div>
+        <select class="card-input card-select" name="cinemas" id="cinemas">
             <?php 
                 foreach($cinemaList as $cinema)
                 {
@@ -19,11 +23,15 @@
             ?>
         </select> 
 
-        <label for="date">Dia</label>
-        <input type="date" name="date" required>
+        <div class="card-left">
+            <h4 for="date">Dia</h4>
+        </div>
+        <input class="card-input" type="date" name="date" required>
 
-        <label for="time">Horario</label>
-        <input type="time" name="time" required> 
+        <div class="card-left">
+            <h4 for="time">Horario</h4>
+        </div>
+        <input class="card-input" type="time" name="time" required> 
 
         <input type="hidden" name="idMovie" value= "<?php echo $idMovie ?>" required> 
 

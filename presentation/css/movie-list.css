@@ -14,14 +14,12 @@
 
 @media (max-device-width: 1500px) {
     .movie-list {
-        display: grid;
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (max-device-width: 1000px) {
     .movie-list {
-        display: grid;
         grid-template-columns: 1fr;
     }
 }

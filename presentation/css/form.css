@@ -1,0 +1,54 @@
+.card-form {
+    text-align: center;
+    position: relative;
+
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+
+    margin: 3rem auto;
+    padding: 2rem 3rem;
+    width: 20%;
+}
+
+@media (max-device-width: 1000px) {
+    .card-form {
+        width: 40%;
+    }
+}
+
+@media (max-device-width: 500px) {
+    .card-form {
+        width: 60%;
+    }
+}
+
+
+.card-input {
+    display: block;
+    width: 100%;
+
+    margin-bottom: 1rem;
+}
+
+.card-select {
+    margin-top: 0.2rem;
+    border: 1px solid var(--main-color);
+}
+
+.card-input:focus, .card-select:focus {
+    outline: 2px solid var(--main-color);
+}
+
+.card-left {
+    text-align: left;
+}
+
+.card-label {
+    margin-bottom: 0.2rem;
+}
+
+.card-info-table {
+    text-align: left;
+    width: 100%;
+    margin: 0.5rem 0;
+}

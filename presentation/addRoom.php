@@ -4,7 +4,6 @@
 ?>
 
     <form method= "POST"> 
-        <h3>ROOM</h3>
         <input type="hidden" name="id_cinema" value=<?= $id_cinema?> >
         <label for="name">Nombre</label>
         <input type="text" name="name" required>

@@ -19,7 +19,7 @@ class BuyController {
     private $movieDAO;
     private $genres;
     private $showDAO;
-    private $CinemaDAO;
+    private $cinemaDAO;
     private $ShowDAO;
     private $purchaseDAO;
     private $paymentDAO;
@@ -30,7 +30,7 @@ class BuyController {
         $this->movieDAO = new MovieDAO();
         $this->genresDAO = new genreDAO();
         $this->showDAO= new ShowDAO();
-        $this->CinemaDAO= new CinemaDAO();
+        $this->cinemaDAO= new CinemaDAO();
         $this->ShowDAO= new ShowDAO();
         $this->purchaseDAO= new purchaseDAO();
         $this->paymentDAO= new PaymentDAO();
@@ -65,6 +65,8 @@ class BuyController {
         }else{
             try{
                 $show = $this->ShowDAO->getShowByID($idShow);
+                $movie = $this->movieDAO->getMovieById($show->getMovie());
+                $cinema = $this->cinemaDAO->getCinemaById($show->getRoom()->getIdCinema());
                 $credit_accounts = $this->creditAccountDAO->getAll();
                 
                 require_once("./presentation/buyForm.php");

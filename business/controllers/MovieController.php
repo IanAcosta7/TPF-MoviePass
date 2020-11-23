@@ -4,7 +4,7 @@ use DAO\MovieDAO;
 use DAO\GenreDAO;
 use DAO\Database;
 use DAO\ShowDAO;
-use DAO\cinemaDAO;
+use DAO\CinemaDAO;
 use DAO\TicketDAO;
 
 class MovieController {
@@ -19,7 +19,7 @@ class MovieController {
         $this->movieDAO = new MovieDAO();
         $this->genresDAO = new genreDAO();
         $this->showDAO= new ShowDAO();
-        $this->cinemaDAO= new cinemaDAO();
+        $this->cinemaDAO= new CinemaDAO();
         $this->ticketDAO= new TicketDAO();
     }
 

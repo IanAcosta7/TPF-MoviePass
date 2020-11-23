@@ -10,6 +10,12 @@
     background-position: left center, right center;
 }
 
+@media (max-device-width: 1000px) {
+    .login {
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+}
+
 .login-form {
     grid-row: 2;
     grid-column: 2;

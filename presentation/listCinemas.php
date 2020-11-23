@@ -6,6 +6,13 @@
 <main>
     <div class="cinema-list">
 
+        <button class="cinema-add">
+            <a class="btn-link" href="<?= ROOT_CLIENT ?>Cinema/addCinema">
+                <img class="cinema-svg" src="<?= ROOT_CLIENT ?>presentation/svg/add-white-18dp.svg">
+                <p>Nuevo Cine</p>
+            </a>
+        </button>
+
         <?php
         if(isset($cinemas)){
             foreach($cinemas as $cinema){
@@ -55,13 +62,6 @@
             }
         }
         ?>
-
-        <button class="cinema-add">
-            <a class="btn-link" href="<?= ROOT_CLIENT ?>Cinema/addCinema">
-                <img class="cinema-svg" src="<?= ROOT_CLIENT ?>presentation/svg/add-white-18dp.svg">
-                <p>Nuevo Cine</p>
-            </a>
-        </button>
 
     </div>
 </main>

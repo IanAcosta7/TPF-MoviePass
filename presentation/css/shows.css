@@ -1,3 +1,9 @@
+@media (orientation: portrait) {
+    .movie-backdrop {
+        height: 100%;
+    }
+}
+
 .movie-backdrop {
     position: fixed;
     width: 100%;
