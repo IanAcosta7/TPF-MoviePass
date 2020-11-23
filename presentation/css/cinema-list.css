@@ -68,3 +68,13 @@
     text-decoration: none;
     color: white;
 }
+
+.room-delete-btn {
+    background-color: white;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+}
+
+.room-delete-btn:hover, .room-delete-btn:focus {
+    color: white;
+}

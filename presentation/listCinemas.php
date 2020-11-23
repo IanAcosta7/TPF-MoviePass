@@ -38,7 +38,7 @@
                     <td>
                         <form action="<?php echo ROOT_CLIENT?>Room/deleteRoom" method="POST">
                             <input type="hidden" name="id" value="<?= $room->getId() ?>">
-                            <button type="submit"><img src="<?= ROOT_CLIENT ?>presentation/svg/delete-white-18dp.svg"></button>
+                            <button class="room-delete-btn" type="submit">x</button>
                         </form>       
                     </td>
                 </tr>

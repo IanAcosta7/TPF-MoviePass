@@ -69,19 +69,19 @@
                <div class="card-info">
                     <h3><?php echo $Movie->getTitle()?></h3>
                     <div><?php echo $Movie->getOriginal_title()?></div>
-                    <!--<p>'. $Movie->getOverview() .'</p>-->
+                    <br>
                     <ul>
-                         <li><?php echo $Movie->getPopularity()?></li>
-                         <li><?php echo $Movie->getVote_average()?></li>
-                         <li><?php echo $Movie->getVote_count()?></li>
-                         <li><?php echo $Movie->getOriginal_language()?></li>
+                         <li><b>Popularidad:</b> <?php echo $Movie->getPopularity()?></li>
+                         <li><b>Votos:</b> <?php echo $Movie->getVote_count()?></li>
+                         <li><b>Lenguaje:</b> <?php echo $Movie->getOriginal_language()?></li>
                          <li>
                          <?php                              
                               foreach ($Movie->getGenres() as $genre) {
                                    echo $genre->getName() . ' ';
                               }
-                         ?>
+                              ?>
                          </li>
+                         <span class="card-vote"><?php echo $Movie->getVote_average()?></span>
                     </ul>
                     <small class="card-date"><?php echo $Movie->getRelease_date(); ?></small>
                </div>

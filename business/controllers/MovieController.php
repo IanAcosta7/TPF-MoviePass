@@ -71,7 +71,11 @@ class MovieController {
         {
             try{
                 $this->showDAO->add($idRoom, $idMovie, $date, $time);
-                header('Location: '. ROOT_CLIENT .'Movie');
+
+                $alertMessage = 'Función añadida con éxito.';
+                $redirectUrl = 'Movie';
+
+                include(ROOT."presentation/alert.php");
             }catch(WebsiteException $e){
                 require_once("./presentation/error.php");
             }

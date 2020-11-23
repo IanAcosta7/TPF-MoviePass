@@ -13,7 +13,10 @@ class HomeController {
     }
 
     public function Index() {
-        require_once('./presentation/signin.php');
+        if (!isset($_SESSION['user']))
+            require_once('./presentation/signin.php');
+        else 
+            header('Location: '.ROOT_CLIENT.'Movie');
     }
 
     public function register(){

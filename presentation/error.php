@@ -6,7 +6,7 @@
 <main class="error">
     <div class="error-msg">
         <?php
-            if (gettype($e) == "WebsiteException") {
+            if (get_class($e) == "business\\exceptions\\WebsiteException") {
         ?>
         <h2 class="error-number"> <?php echo $e->getErrorNumber(); ?> </h2>
         <p class="error-desc"> <?php echo $e->getMessage(); ?> </p>
