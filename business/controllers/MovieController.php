@@ -70,10 +70,15 @@ class MovieController {
         if($idRoom != "" && $date != "" && $time != "" && $idMovie != "")
         {
             try{
-                $this->showDAO->add($idRoom, $idMovie, $date, $time);
+                $err_string = $this->showDAO->add($idRoom, $idMovie, $date, $time);
 
-                $alertMessage = 'Función añadida con éxito.';
-                $redirectUrl = 'Movie';
+                if ($err_string) {
+                    $alertMessage = $err_string;
+                    $redirectUrl = 'Movie/showAddMovie';
+                } else {
+                    $alertMessage = 'Función añadida con éxito.';
+                    $redirectUrl = 'Movie';
+                }
 
                 include(ROOT."presentation/alert.php");
             }catch(WebsiteException $e){

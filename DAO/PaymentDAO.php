@@ -17,7 +17,7 @@ class paymentDAO {
 
     public function add($payment){
         Database::connect();
-        Database::execute('add_payment', 'IN', array($payment->getId(), $payment->getCred_acc()->getCompany(), $payment->getAuth_code(), $payment->getTotal(),$payment->getDate()));
+        Database::execute('add_payment', 'IN', array($payment->getCred_acc()->getCompany(), $payment->getAuth_code(), $payment->getTotal(),$payment->getDate()));
     }
 
     private function getDBPayment(){

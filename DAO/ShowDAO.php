@@ -4,6 +4,7 @@ use business\models\Show;
 use business\models\Movie;
 use business\models\Genre;
 use business\models\Room;
+use business\exceptions\WebsiteException;
 use DAO\Database;
 
 require_once("./config/ENV.php");
@@ -19,7 +20,7 @@ class ShowDAO {
 
     public function add($idRoom, $idMovie, $date, $time){
         Database::connect();
-        Database::execute('add_show', 'IN', array($idRoom, $idMovie, $date, $time));
+        return Database::execute('add_show', 'OUT', array($idRoom, $idMovie, $date, $time))[0][0];
     }
 
     private function getDBShows(){

@@ -4,30 +4,18 @@ namespace business\models;
 
 class Purchase {
     private $id;
-    /*private $tickets;
-    private $payment;*/
     private $user_id;
     private $discount;
     private $date;
     private $total;
 
-    public function __construct($id, /*$tickets, $payment,*/ $user_id, $discount, $date, $total) {
+    public function __construct($id, $user_id, $discount, $date, $total) {
         $this->id = $id;
-        /*$this->tickets = $tickets;
-        $this->payment = $payment;*/
         $this->user_id = $user_id;
         $this->discount = $discount;
         $this->date = $date;
         $this->total = $total;
     }
-
-	/*public function getPayment(){
-		return $this->payment;
-	}
-
-	public function setPayment($payment){
-		$this->payment = $payment;
-	}*/
 
     public function getId(){
 		return $this->id;
@@ -44,14 +32,6 @@ class Purchase {
 	public function setUser_id($user_id){
 		$this->user_id = $user_id;
 	}
-
-    /*public function gettickets(){
-		return $this->tickets;
-	}
-
-	public function settickets($tickets){
-		$this->tickets = $tickets;
-	}*/
 
 	public function getDiscount(){
 		return $this->discount;

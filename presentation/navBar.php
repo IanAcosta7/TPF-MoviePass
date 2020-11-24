@@ -5,7 +5,7 @@
             <label class="dropdown-label">Opciones</label>
             <ul class="dropdown-options dropdown-menu">
                 <li><a class="drop-option" href="<?= ROOT_CLIENT ?>Movie">Mostrar peliculas</a></li>
-                <li><a class="drop-option" href="<?= ROOT_CLIENT ?>">Carrito</a></li>
+                <li><a class="drop-option" href="<?= ROOT_CLIENT ?>Ticket">Mis tickets</a></li>
             </ul>
         </div>
         <?php

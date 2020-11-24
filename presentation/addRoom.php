@@ -3,14 +3,20 @@
     require_once("navbar.php");
 ?>
 
-    <form method= "POST"> 
+    <form  class="card-form" method= "POST"> 
         <input type="hidden" name="id_cinema" value=<?= $id_cinema?> >
-        <label for="name">Nombre</label>
-        <input type="text" name="name" required>
-        <label for="capacity">Capacidad</label>
-        <input type="number" name="capacity" required>
-        <label for="price">Precio</label>
-        <input type="number" name="price" required>
+        <div class="card-left">
+            <label for="name">Nombre</label>
+        </div>
+        <input class="card-input" type="text" name="name" required>
+        <div class="card-left">
+            <label for="capacity">Capacidad</label>
+        </div>
+        <input class="card-input" type="number" name="capacity" min="1" value="1" required>
+        <div class="card-left">
+            <label for="price">Precio</label>
+        </div>
+        <input class="card-input" type="number" name="price" min="0" required>
 
         <button type="submit">Enviar</button>
         <button type="reset">Borrar</button>

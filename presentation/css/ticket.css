@@ -1,0 +1,79 @@
+.tickets {
+    margin: 1rem;
+}
+
+.ticket-empty {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--main-color);
+
+    display: block;
+    width: 100%;
+}
+
+.ticket-title {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin: 2rem 0;
+}
+
+.ticket-card {
+    position: relative;
+
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    width: 150px;
+    height: 150px;
+    padding: 2rem;
+}
+
+.ticket-id {
+    position: absolute;
+    color: gray;
+    top: 0.5rem;
+    left: 0.5rem;
+}
+
+.ticket-table {
+    text-align: left;
+    width: 20%;
+}
+
+.ticket-qr {
+    display: block;
+    width: 100%;
+}
+
+.ticket-list {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+@media (max-device-width: 1800px) {
+    .ticket-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (max-device-width: 1400px) {
+    .ticket-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (max-device-width: 1200px) {
+    .ticket-list {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+
+@media (max-device-width: 900px) {
+    .ticket-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+

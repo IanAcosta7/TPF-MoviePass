@@ -39,13 +39,15 @@
             <h4>Tipo de tarjeta</h4>
         </div>
         <?php
+            $flag = 'checked="true"';
             foreach ($credit_accounts as $acc) {
                 echo '
                     <div class="card-input card-left"card-label>
                         <input type="hidden" name="show_id" value="'. $show->getId() .'">
-                        <input type="radio" name="card" value="'. $acc->getId() .'"> '. $acc->getCompany() .'
+                        <input type="radio" '. $flag .' name="card" value="'. $acc->getId() .'" required> '. $acc->getCompany() .'
                     </div>
                 ';
+                $flag = '';
             }
         ?>
 

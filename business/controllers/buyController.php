@@ -52,7 +52,7 @@ class BuyController {
                 $this->paymentDAO->add(new Payment(null, $id, new CreditAccount(null, $card), 65553489, date('Y-m-d'),($this->ShowDAO->getShowByID($idShow)->getRoom()->getPrice() * $quantity)));
                 
                 for ($i = 0; $i < $quantity; $i++) {
-                    $this->ticketDAO->add(new Ticket(null, $id, $idShow, $i));
+                    $this->ticketDAO->add(new Ticket(null, null, $idShow, hash("sha256", $i + 1 . '-' . $id)), $id);
                 }
 
                 $alertMessage = 'Compra realizada con éxito.';

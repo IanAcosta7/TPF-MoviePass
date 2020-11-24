@@ -4,14 +4,14 @@ namespace business\models;
 
 class Ticket {
     private $id;
-    private $id_purchase;
+    private $purchase;
     private $id_show;
     private $qr;
     
     
-    public function __construct($id, $id_purchase, $id_show, $qr) {
+    public function __construct($id, $purchase, $id_show, $qr) {
         $this->id = $id;
-        $this->id_purchase = $id_purchase;
+        $this->purchase = $purchase;
         $this->id_show = $id_show;
         $this->qr = $qr;
     }
@@ -32,12 +32,12 @@ class Ticket {
 		$this->id_show = $id_show;
 	}
 
-	public function getId_purchase(){
-		return $this->id_purchase;
+	public function getPurchase(){
+		return $this->purchase;
 	}
 
-	public function setId_purchase($id_purchase){
-		$this->id_purchase = $id_purchase;
+	public function setPurchase($purchase){
+		$this->purchase = $purchase;
 	}
 
 	public function getQr(){
